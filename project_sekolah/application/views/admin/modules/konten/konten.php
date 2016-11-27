@@ -25,7 +25,7 @@
                                             <th>Isi</th>
                                             <th>Kategori Konten</th>
                                             <th>Create By</th>
-                                            <th>Gambar</th>
+                                            <th width="10%">Gambar</th>
                                             <th width="15%">Aksi</th>
                                         </tr>
                                     </thead>

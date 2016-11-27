@@ -23,7 +23,8 @@
                                         <tr>
                                             <th>Nama</th>
                                             <th>Keterangan</th>
-                                            <th>Tipe</th>
+                                            <th>Status Banner</th>
+                                            <th width="10%">Gambar</th>
                                             <th width="15%">Aksi</th>
                                         </tr>
                                     </thead>

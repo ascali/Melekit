@@ -25,9 +25,9 @@
                         <div class="form-group">
                             <label class="control-label col-md-3">Jurusan</label>
                             <div class="col-md-9"> 
-                                <input name="id_jurusan" placeholder=" Jurusan" max="20" maxlength="20" class="form-control" type="text" required="">
-                             
-                                <!-- <input name="acara" placeholder=" Acara" max="20" maxlength="20" class="form-control" type="text" required=""> -->
+                                <select name="id_jurusan" id="jurusan" class="form-control">
+                                    
+                                </select>
                                 <span class="help-block"></span>
                             </div>
                         </div>

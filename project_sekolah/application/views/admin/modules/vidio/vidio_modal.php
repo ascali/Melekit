@@ -29,14 +29,6 @@
                                 <span class="help-block"></span>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="control-label col-md-3">Kategori Vidio</label>
-                            <div class="col-md-9">
-                                <select name="id_galeri" id="id_galeri" class="form-control">
-                                </select>
-                                <span class="help-block"></span>
-                            </div>
-                        </div>
                         
                     </div>
                 </form>

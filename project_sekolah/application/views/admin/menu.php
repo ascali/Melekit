@@ -15,6 +15,9 @@
                         <li>
                             <a href="<?=base_url('administrator/dashboard')?>"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
+                        <li>
+                            <a href="<?=base_url('administrator/admin')?>"><i class="fa fa-dashboard fa-fw"></i> Admin</a>
+                        </li>
                          <li>
                             <a href="#"><i class="fa fa-institution fa-fw"></i> Sekolah <span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
@@ -24,27 +27,36 @@
                                 <li>
                                     <a href="<?=base_url();?>administrator/visi_misi">Visi & Misi</a>
                                 </li>
+                                <li>
+                                    <a href="<?=base_url('administrator/detail_kelas')?>"><i class="fa fa-book fa-fw"></i> Detail kelas</a>
+                                </li>
+                                <li>
+                                    <a href="<?=base_url('administrator/guru')?>"><i class="fa fa-user fa-fw"></i> Guru</a>
+                                </li>
+                                <li>
+                                    <a href="<?=base_url('administrator/siswa')?>"><i class="fa fa-user fa-fw"></i> Siswa</a>
+                                </li>
+                                <li>
+                                    <a href="<?=base_url('administrator/materi_ajar')?>"><i class="fa fa-book fa-fw"></i> Materi Ajar</a>
+                                </li>
+                                <li>
+                                    <a href="<?=base_url('administrator/eskull')?>"><i class="fa fa-book fa-fw"></i> Eskull</a>
+                                </li>
+                                <li>
+                                    <a href="<?=base_url('administrator/jurusan')?>"><i class="fa fa-book fa-fw"></i> Jurusan</a>
+                                </li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
-                            <a href="<?=base_url('administrator/users')?>"><i class="fa fa-users fa-fw"></i> Users</a>
-                        </li>
-                        <li>
-                            <a href="<?=base_url('administrator/kelas')?>"><i class="fa fa-tasks fa-fw"></i> Kelas</a>
-                        </li>
-                        <li>
-                            <a href="<?=base_url('administrator/siswa')?>"><i class="fa fa-user fa-fw"></i> Siswa</a>
-                        </li>
-                        <li>
                             <a href="<?=base_url('administrator/kategori_konten')?>"><i class="fa fa-bars fa-fw"></i> Kategori konten</a>
                         </li>
-                        <li>
+                        <!-- <li>
                             <a href="<?=base_url('administrator/menu')?>"><i class="fa fa-th-list fa-fw"></i> Menu</a>
                         </li>
                         <li>
                             <a href="<?=base_url('administrator/submenu')?>"><i class="fa fa-list-ol fa-fw"></i> Submenu</a>
-                        </li>
+                        </li> -->
                         <li>
                             <a href="<?=base_url('administrator/konten')?>"><i class="fa fa-file-text fa-fw"></i> Konten</a>
                         </li>
@@ -64,22 +76,10 @@
                             <a href="<?=base_url('administrator/kemitraan')?>"><i class="fa fa-book fa-fw"></i> Kemitraan</a>
                         </li>
                         <li>
-                            <a href="<?=base_url('administrator/detail_kelas')?>"><i class="fa fa-book fa-fw"></i> Detail kelas</a>
-                        </li>
-                        <li>
-                            <a href="<?=base_url('administrator/materi_ajar')?>"><i class="fa fa-book fa-fw"></i> Materi Ajar</a>
-                        </li>
-                        <li>
-                            <a href="<?=base_url('administrator/eskull')?>"><i class="fa fa-book fa-fw"></i> Eskull</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-image fa-fw"></i> Galeri <span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-image fa-fw"></i> Album <span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="<?=base_url();?>administrator/galeri"> Album</a>
-                                </li>
-                                <li>
-                                    <a href="<?=base_url();?>administrator/gambar"> Gambar</a>
+                                    <a href="<?=base_url();?>administrator/galeri"> Galeri</a>
                                 </li>
                                 <li>
                                     <a href="<?=base_url();?>administrator/vidio"> Vidio</a>

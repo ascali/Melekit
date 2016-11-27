@@ -32,7 +32,9 @@
                         <div class="form-group">
                             <label class="control-label col-md-3">Jurusan</label>
                             <div class="col-md-9">
-                                <input name="jurusan" placeholder=" Jurusan" max="20" maxlength="20" class="form-control" type="text" required="">
+                                <select name="jurusan" id="jurusan" class="form-control">
+                                </select>
+                                <!-- <input name="jurusan" placeholder=" Jurusan" max="20" maxlength="20" class="form-control" type="text" required=""> -->
                                 <span class="help-block"></span>
                             </div>
                         </div>
@@ -51,12 +53,24 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3">Status</label>
+                            <label class="control-label col-md-3">Status Kartu</label>
                             <div class="col-md-9">
-                            <select name="status" class="form-control">
+                            <select name="status_kartu" class="form-control">
                                 <option value="">-Pilih Status-</option>
-                                <option value="1">Aktif</option>
-                                <option value="0">Tidak Aktif</option>
+                                <option value="1">Cetak</option>
+                                <option value="0">Menunggu</option>
+                            </select>
+                                <!-- <input name="status" placeholder=" Name" max="20" maxlength="20" class="form-control" type="text" required=""> -->
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">Status Terdaftar</label>
+                            <div class="col-md-9">
+                            <select name="status_terdaftar" class="form-control">
+                                <option value="">-Pilih Status-</option>
+                                <option value="1">Terdaftar</option>
+                                <option value="0">Menunggu</option>
                             </select>
                                 <!-- <input name="status" placeholder=" Name" max="20" maxlength="20" class="form-control" type="text" required=""> -->
                                 <span class="help-block"></span>

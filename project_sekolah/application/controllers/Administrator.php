@@ -783,255 +783,6 @@ class Administrator extends CI_Controller {
 //====================================================================================//
 
 //====================================================================================//
-// Mulai Bagian Menu
-/* Work by Ibnu */
-//====================================================================================//
-
-	public function menu()
-	{
-		$take_akun = $this->Global_models->take_user($this->session->userdata('username'));
-		$data = array('username' => $take_akun);
-		$stat = $this->session->userdata('isLogin');
-
-		if (isset($stat)) {
-			$data['modules'] = 'menu';
-			$data['modals']	 = 'admin/modules/menu/menu_modal';
-			$data['content'] = 'admin/modules/menu/menu';
-			$this->load->view('admin/index', $data);
-		}else {
-			echo "<script> alert('Check your username and password!'); </script>";
-			$this->session->sess_destroy();
-			redirect(base_url(),'refresh');	
-		}
-	}
-
-	public function menu_data()
-	{
-    	$this->db->order_by('id', 'desc');
-    	// $query = $this->db->get('menu');
-    	$query = $this->db->query('SELECT * FROM menu ORDER BY id DESC');
-    	$query = $query->result();
-    	if (isset($query)) {
-    		$status = 'success';
-    		$query = $query;
-    	}else {
-    		$status = 'error';
-    		$query = 'error';
-    	}
-    	header('Content-Type: application/json');
-    	echo json_encode(array('status' => $status, 'data' => $query));
-	}
-
-    public function menu_edit_data($id)
-    {
-    	$this->db->from('menu');
-		$this->db->where('id',$id);
-		$query = $this->db->get();
-		if (isset($query)) {
-    		$status = 'success';
-    		$query = $query;
-    	}else {
-    		$status = 'error';
-    		$query = 'error';
-    	}
-    	$query = $query->row();
-    	header('Content-Type: application/json');
-    	echo json_encode(array('status' => $status, 'data' => $query));
-    }
-
-    //Aksi Insert
-    public function menu_insert_data()
-    {
-    	$this->_validate_menu();
-    	$data = array(
-				'nama' => $this->input->post('nama'),
-				'href' => $this->input->post('href'),
-				'created' => date('Y-m-d H:i:s'),
-				'updated' => date('Y-m-d H:i:s')
-			);
-
-			$dbInsert = $this->db->insert('menu', $data);
-			echo json_encode(array('status' => TRUE));
-    }
-    // Aksi update
-    public function menu_update_data()
-    {
-			$this->_validate_menu();
-			$data = array(
-					'nama' => $this->input->post('nama'),
-					'href' => $this->input->post('href'),
-					'updated' => date('Y-m-d H:i:s')
-				);
-
-			$this->db->where('id', $this->input->post('id'));
-			$this->db->update('menu', $data);
-			echo json_encode(array('status' => TRUE));
-    }
-
-    public function menu_delete_data($id)
-    {
-    	$this->db->where('id', $id);
-    	$this->db->delete('menu');
-    	echo json_encode(array("status" => TRUE));
-    }
-    // Untuk Validasi
-    private function _validate_menu()
-	{
-		$data = array();
-		$data['error_string'] = array();
-		$data['inputerror'] = array();
-		$data['status'] = TRUE;
-
-		if($this->input->post('nama') == '')
-		{
-			$data['inputerror'][] = 'nama';
-			$data['error_string'][] = 'Nama is required';
-			$data['status'] = FALSE;
-		}
-		if($this->input->post('href') == '')
-		{
-			$data['inputerror'][] = 'href';
-			$data['error_string'][] = 'Link href is required';
-			$data['status'] = FALSE;
-		}
-		if($data['status'] === FALSE)
-		{
-			echo json_encode($data);
-			exit();
-		}
-
-	}
-//====================================================================================//
-// Akhir Bagian Menu
-//====================================================================================//
-
-//====================================================================================//
-// Mulai Bagian Submenu
-/* Work by Ibnu */
-//====================================================================================//
-
-	public function submenu()
-	{
-		$take_akun = $this->Global_models->take_user($this->session->userdata('username'));
-		$data = array('username' => $take_akun);
-		$stat = $this->session->userdata('isLogin');
-
-		if (isset($stat)) {
-			$data['modules'] = 'submenu';
-			$data['modals']	 = 'admin/modules/submenu/submenu_modal';
-			$data['content'] = 'admin/modules/submenu/submenu';
-			$this->load->view('admin/index', $data);
-		}else {
-			echo "<script> alert('Check your username and password!'); </script>";
-			$this->session->sess_destroy();
-			redirect(base_url(),'refresh');	
-		}
-	}
-
-	public function submenu_data()
-	{
-    	// $this->db->order_by('id', 'desc');
-    	// $query = $this->db->get('submenu');
-    	$query = $this->db->query('SELECT a.*, b.nama as nama_menu FROM submenu AS a 
-    								JOIN menu AS b ON a.id_menu = b.id ORDER BY a.id DESC');
-    	$query = $query->result();
-    	if (isset($query)) {
-    		$status = 'success';
-    		$query = $query;
-    	}else {
-    		$status = 'error';
-    		$query = 'error';
-    	}
-    	header('Content-Type: application/json');
-    	echo json_encode(array('status' => $status, 'data' => $query));
-	}
-
-    public function submenu_edit_data($id)
-    {
-    	$this->db->from('submenu');
-			$this->db->where('id',$id);
-			$query = $this->db->get();
-			if (isset($query)) {
-    		$status = 'success';
-    		$query = $query;
-    	}else {
-    		$status = 'error';
-    		$query = 'error';
-    	}
-    	$query = $query->row();
-    	header('Content-Type: application/json');
-    	echo json_encode(array('status' => $status, 'data' => $query));
-    }
-
-    //Aksi Insert
-    public function submenu_insert_data()
-    {
-    	$this->_validate_submenu();
-    	$data = array(
-				'nama' => $this->input->post('nama'),
-				'href' => $this->input->post('href'),
-				'id_menu' => $this->input->post('id_menu'),
-				'created' => date('Y-m-d H:i:s'),
-				'updated' => date('Y-m-d H:i:s')
-			);
-
-		$dbInsert = $this->db->insert('submenu', $data);
-		echo json_encode(array('status' => TRUE));
-    }
-    // Aksi update
-    public function submenu_update_data()
-    {
-		$this->_validate_submenu();
-		$data = array(
-				'nama' => $this->input->post('nama'),
-				'href' => $this->input->post('href'),
-				'id_menu' => $this->input->post('id_menu'),
-				'updated' => date('Y-m-d H:i:s')
-			);
-
-		$this->db->where('id', $this->input->post('id'));
-		$this->db->update('submenu', $data);
-		echo json_encode(array('status' => TRUE));
-    }
-
-    public function submenu_delete_data($id)
-    {
-    	$this->db->where('id', $id);
-    	$this->db->delete('submenu');
-    	echo json_encode(array("status" => TRUE));
-    }
-    // Untuk Validasi
-    private function _validate_submenu()
-	{
-		$data = array();
-		$data['error_string'] = array();
-		$data['inputerror'] = array();
-		$data['status'] = TRUE;
-
-		if($this->input->post('nama') == '')
-		{
-			$data['inputerror'][] = 'nama';
-			$data['error_string'][] = 'Nama is required';
-			$data['status'] = FALSE;
-		}
-		if($this->input->post('href') == '')
-		{
-			$data['inputerror'][] = 'href';
-			$data['error_string'][] = 'Link href is required';
-			$data['status'] = FALSE;
-		}
-		if($data['status'] === FALSE)
-		{
-			echo json_encode($data);
-			exit();
-		}
-
-	}
-//====================================================================================//
-// Akhir Bagian Submenu
-//====================================================================================//
-
-//====================================================================================//
 // Mulai Bagian Vidio
 /* Work by Ibnu */
 //====================================================================================//
@@ -1056,10 +807,10 @@ class Administrator extends CI_Controller {
 
 	public function vidio_data()
 	{
-    	// $this->db->order_by('id', 'desc');
-    	// $query = $this->db->get('video');
-    	$query = $this->db->query('SELECT a.*,b.nama as nama_galeri FROM video a
-    							   LEFT JOIN galeri b ON(a.id_galeri=b.id) ORDER BY id DESC');
+    	$this->db->order_by('id', 'desc');
+    	$query = $this->db->get('video');
+    	// $query = $this->db->query('SELECT a.*,b.nama as nama_galeri FROM video a
+    	// 						   LEFT JOIN galeri b ON(a.id_galeri=b.id) ORDER BY id DESC');
     	$query = $query->result();
     	if (isset($query)) {
     		$status = 'success';
@@ -1096,7 +847,6 @@ class Administrator extends CI_Controller {
     	$data = array(
 				'nama' => $this->input->post('nama'),
 				'path' => $this->input->post('link'),
-				'id_galeri' => $this->input->post('id_galeri'),
 				'created' => date('Y-m-d H:i:s'),
 				'updated' => date('Y-m-d H:i:s')
 			);
@@ -1111,7 +861,6 @@ class Administrator extends CI_Controller {
 		$data = array(
 				'nama' => $this->input->post('nama'),
 				'path' => $this->input->post('link'),
-				'id_galeri' => $this->input->post('id_galeri'),
 				'updated' => date('Y-m-d H:i:s')
 			);
 
@@ -1144,12 +893,6 @@ class Administrator extends CI_Controller {
 		{
 			$data['inputerror'][] = 'link';
 			$data['error_string'][] = 'Link vidio is required';
-			$data['status'] = FALSE;
-		}
-		if($this->input->post('id_galeri') == '')
-		{
-			$data['inputerror'][] = 'id_galeri';
-			$data['error_string'][] = 'Kategori vidio is required';
 			$data['status'] = FALSE;
 		}
 		if($data['status'] === FALSE)
@@ -1188,10 +931,10 @@ class Administrator extends CI_Controller {
 
 	public function siswa_data()
 	{
-    	$this->db->order_by('id', 'desc');
-    	$query = $this->db->get('siswa');
-    	// $query = $this->db->query('SELECT a.*, b.nama as nama_kelas, b.wali_kelas FROM siswa a
-    								// LEFT JOIN kelas b ON(a.id_kelas=b.id) ORDER BY a.id DESC');
+    	// $this->db->order_by('id', 'desc');
+    	// $query = $this->db->get('siswa');
+    	$query = $this->db->query('SELECT a.*, b.nama as nama_jurusan FROM siswa a
+    								JOIN jurusan b ON (a.id_jurusan=b.id) ORDER BY a.id DESC');
     	$query = $query->result();
     	if (isset($query)) {
     		$status = 'success';
@@ -1504,42 +1247,95 @@ class Administrator extends CI_Controller {
     }
 
     //Aksi Insert
-    public function galeri_insert_data()
-    {
-    	$this->_validate_galeri();
-    	$data = array(
-				'nama' => $this->input->post('nama'),
-				'keterangan' => $this->input->post('keterangan'),
-				'type' => $this->input->post('tipe'),
-				'created' => date('Y-m-d H:i:s'),
-				'updated' => date('Y-m-d H:i:s')
-			);
-
-		$dbInsert = $this->db->insert('galeri', $data);
-		echo json_encode(array('status' => TRUE));
-    }
-    // Aksi update
-    public function galeri_update_data()
-    {
+    function galeri_add()
+	{
 		$this->_validate_galeri();
 		$data = array(
 				'nama' => $this->input->post('nama'),
 				'keterangan' => $this->input->post('keterangan'),
-				'type' => $this->input->post('tipe'),
-				'updated' => date('Y-m-d H:i:s')
+				'banner' => $this->input->post('banner'),
+				'created' => date('Y-m-d H:i:s'),
+				'updated' => date('Y-m-d H:i:s'),
 			);
+
+		if(!empty($_FILES['file']['name']))
+		{
+			$upload = $this->galeri_do_upload();
+			$data['file'] = $upload;
+		}
+
+		$dbInsert = $this->db->insert('galeri', $data);
+		echo json_encode(array('status' => TRUE));
+	}
+
+	function galeri_update()
+	{
+		$this->_validate_galeri();
+		$data = array(
+			'nama' => $this->input->post('nama'),
+			'keterangan' => $this->input->post('keterangan'),
+			'banner' => $this->input->post('banner'),
+			'updated' => date('Y-m-d H:i:s'),
+			);
+
+		if($this->input->post('remove_galeri')) // if remove photo_user checked
+		{
+			if(file_exists('public/admin/img/galeri/'.$this->input->post('remove_galeri')) && $this->input->post('remove_galeri'))
+				unlink('public/admin/img/galeri/'.$this->input->post('remove_galeri'));
+			$data['file'] = '';
+		}
+
+		if(!empty($_FILES['file']['name']))
+		{
+			$upload = $this->galeri_do_upload();
+
+			//delete file
+			$galeri = $this->Global_models->galeri_get_by_id($this->input->post('id'));
+			if(file_exists('public/admin/img/galeri/'.$galeri->file) && $galeri->file)
+				unlink('public/admin/img/galeri/'.$galeri->file);
+
+			$data['file'] = $upload;
+		}
 
 		$this->db->where('id', $this->input->post('id'));
 		$this->db->update('galeri', $data);
 		echo json_encode(array('status' => TRUE));
-    }
+	}
 
-    public function galeri_delete_data($id)
-    {
-    	$this->db->where('id', $id);
-    	$this->db->delete('galeri');
-    	echo json_encode(array("status" => TRUE));
-    }
+	function galeri_delete($id)
+	{
+		//delete file
+		$galeri = $this->Global_models->galeri_get_by_id($id);
+		if(file_exists('public/admin/img/galeri/'.$galeri->file) && $galeri->file)
+			unlink('public/admin/img/galeri/'.$galeri->file);
+
+		$this->db->where('id', $id);
+			$this->db->delete('galeri');
+			echo json_encode(array("status" => TRUE));
+	}
+
+	private function galeri_do_upload()
+	{
+		$config['upload_path']          = 'public/admin/img/galeri/';
+		$config['allowed_types']        = 'gif|jpg|png';
+		$config['max_size']             = 2048; //set max size allowed in Kilobyte
+		$config['max_width']            = 99999; // set max width image allowed
+		$config['max_height']           = 99999; // set max height allowed
+		$config['file_name']            = round(microtime(true) * 1000); //just milisecond timestamp fot unique name
+
+		$this->upload->initialize($config);
+		$this->load->library('upload', $config);
+
+		if(!$this->upload->do_upload('file')) //upload and validate
+		{
+			$data['inputerror'][] = 'file';
+			$data['error_string'][] = 'Upload error: '.$this->upload->display_errors('',''); //show ajax error
+			$data['status'] = FALSE;
+			echo json_encode($data);
+			exit();
+		}
+		return $this->upload->data('file_name');
+	}
     // Untuk Validasi
     private function _validate_galeri()
 	{
@@ -1560,10 +1356,10 @@ class Administrator extends CI_Controller {
 			$data['error_string'][] = 'Keterangan is required';
 			$data['status'] = FALSE;
 		}
-		if($this->input->post('tipe') == '')
+		if($this->input->post('banner') == '')
 		{
-			$data['inputerror'][] = 'tipe';
-			$data['error_string'][] = 'Tipe is required';
+			$data['inputerror'][] = 'banner';
+			$data['error_string'][] = 'Status Banner is required';
 			$data['status'] = FALSE;
 		}
 		if($data['status'] === FALSE)
@@ -1575,206 +1371,6 @@ class Administrator extends CI_Controller {
 	}
 //====================================================================================//
 // Akhir Bagian Kategori Galeri
-//====================================================================================//
-
-//====================================================================================//
-// Mulai Bagian Gambar
-// by Ascal
-//====================================================================================//
-	function gambar()
-	{
-		$take_akun = $this->Global_models->take_user($this->session->userdata('username'));
-		$data = array('username' => $take_akun);
-		$stat = $this->session->userdata('isLogin');
-
-		if (isset($stat)) {
-			$data['modules'] = 'gambar';
-			$data['modals']	 = 'admin/modules/gambar/gambar_modal';
-			$data['content'] = 'admin/modules/gambar/gambar';
-			$this->load->view('admin/index', $data);
-		}else {
-			echo "<script> alert('Check your username and password!'); </script>";
-			$this->session->sess_destroy();
-			redirect(base_url(),'refresh');	
-		}
-	}
-
-	function gambar_data()
-	{
-			// $this->db->order_by('id', 'desc');
-			// $query = $this->db->get('gambar');
-			$query = $this->db->query('SELECT a.*,b.nama as nama_galeri, c.judul as nama_konten FROM gambar a
-									   LEFT JOIN galeri b ON(a.id_galeri=b.id)
-									   LEFT JOIN konten c ON(a.id_konten=c.id) ORDER BY id DESC');
-			$query = $query->result();
-			if (isset($query)) {
-				$status = 'success';
-				$query = $query;
-			}else {
-				$status = 'error';
-				$query = 'error';
-			}
-			header('Content-Type: application/json');
-			echo json_encode(array('status' => $status, 'data' => $query));
-	}
-
-	function gambar_edit_data($id)
-	{
-			$this->db->from('gambar');
-			$this->db->where('id', $id);
-			$query = $this->db->get();
-			if (isset($query)) {
-				$status = 'success';
-				$query = $query;
-			}else {
-				$status = 'error';
-				$query = 'error';
-			}
-			$query = $query->row();
-			header('Content-Type: application/json');
-			echo json_encode(array('status' => $status, 'data' => $query));
-		}
-
-	function gambar_add()
-	{
-		$this->_validate_gambar();
-		$data = array(
-				'nama' => $this->input->post('nama'),
-				'id_konten' => $this->input->post('id_konten'),
-				'id_galeri' => $this->input->post('id_galeri'),
-				'keterangan' => $this->input->post('keterangan'),
-				'status_slide' => $this->input->post('status_slide'),
-				'created' => date('Y-m-d H:i:s'),
-				'updated' => date('Y-m-d H:i:s'),
-			);
-
-		if(!empty($_FILES['file']['name']))
-		{
-			$upload = $this->gambar_do_upload();
-			$data['file'] = $upload;
-		}
-
-		$dbInsert = $this->db->insert('gambar', $data);
-		echo json_encode(array('status' => TRUE));
-	}
-
-	function gambar_update()
-	{
-		$this->_validate_gambar();
-		$data = array(
-			'nama' => $this->input->post('nama'),
-			'id_konten' => $this->input->post('id_konten'),
-			'id_galeri' => $this->input->post('id_galeri'),
-			'keterangan' => $this->input->post('keterangan'),
-				'status_slide' => $this->input->post('status_slide'),
-			'updated' => date('Y-m-d H:i:s'),
-			);
-
-		if($this->input->post('remove_gambar')) // if remove photo_user checked
-		{
-			if(file_exists('public/admin/img/gambar/'.$this->input->post('remove_gambar')) && $this->input->post('remove_gambar'))
-				unlink('public/admin/img/gambar/'.$this->input->post('remove_gambar'));
-			$data['file'] = '';
-		}
-
-		if(!empty($_FILES['file']['name']))
-		{
-			$upload = $this->gambar_do_upload();
-
-			//delete file
-			$gambar = $this->Global_models->gambar_get_by_id($this->input->post('id'));
-			if(file_exists('public/admin/img/gambar/'.$gambar->file) && $gambar->file)
-				unlink('public/admin/img/gambar/'.$gambar->file);
-
-			$data['file'] = $upload;
-		}
-
-		$this->db->where('id', $this->input->post('id'));
-		$this->db->update('gambar', $data);
-		echo json_encode(array('status' => TRUE));
-	}
-
-	function gambar_delete($id)
-	{
-		//delete file
-		$gambar = $this->Global_models->gambar_get_by_id($id);
-		if(file_exists('public/admin/img/gambar/'.$gambar->file) && $gambar->file)
-			unlink('public/admin/img/gambar/'.$gambar->file);
-
-		$this->db->where('id', $id);
-			$this->db->delete('gambar');
-			echo json_encode(array("status" => TRUE));
-	}
-
-	private function gambar_do_upload()
-	{
-		$config['upload_path']          = 'public/admin/img/gambar/';
-		$config['allowed_types']        = 'gif|jpg|png';
-		$config['max_size']             = 2048; //set max size allowed in Kilobyte
-		$config['max_width']            = 99999; // set max width image allowed
-		$config['max_height']           = 99999; // set max height allowed
-		$config['file_name']            = round(microtime(true) * 1000); //just milisecond timestamp fot unique name
-
-		$this->upload->initialize($config);
-		$this->load->library('upload', $config);
-
-		if(!$this->upload->do_upload('file')) //upload and validate
-		{
-			$data['inputerror'][] = 'file';
-			$data['error_string'][] = 'Upload error: '.$this->upload->display_errors('',''); //show ajax error
-			$data['status'] = FALSE;
-			echo json_encode($data);
-			exit();
-		}
-		return $this->upload->data('file_name');
-	}
-
-		// Untuk Validasi
-	private function _validate_gambar()
-	{
-		$data = array();
-		$data['error_string'] = array();
-		$data['inputerror'] = array();
-		$data['status'] = TRUE;
-
-		if($this->input->post('nama') == '')
-		{
-			$data['inputerror'][] = 'nama';
-			$data['error_string'][] = 'nama is required';
-			$data['status'] = FALSE;
-		}
-
-		// if($this->input->post('id_konten') == '')
-		// {
-		// 	$data['inputerror'][] = 'id_konten';
-		// 	$data['error_string'][] = 'Konten is required ';
-		// 	$data['status'] = FALSE;
-		// }
-
-		// if($this->input->post('id_galeri') == '')
-		// {
-		// 	$data['inputerror'][] = 'id_galeri';
-		// 	$data['error_string'][] = 'Galeri is required';
-		// 	$data['status'] = FALSE;
-		// }
-
-		if($this->input->post('status_slide') == '')
-		{
-			$data['inputerror'][] = 'status_slide';
-			$data['error_string'][] = 'Status Slide is required';
-			$data['status'] = FALSE;
-		}
-
-		if($data['status'] === FALSE)
-		{
-			echo json_encode($data);
-			exit();
-		}
-
-	}
-
-//====================================================================================//
-// Akhir Bagian Gambar
 //====================================================================================//
 
 /*============================================================================================================================*/
@@ -1969,7 +1565,7 @@ class Administrator extends CI_Controller {
 
 /*============================================================================================================================*/
 /* Mulai Model Profil */
-/* Work by Afiys */
+/* Work by Ibnu */
 /*============================================================================================================================*/
 
 	public function profil()
@@ -2232,7 +1828,7 @@ class Administrator extends CI_Controller {
 /*============================================================================================================================*/
 
 //====================================================================================//
-// Mulai Bagian Galeri
+// Mulai Bagian Registrasi
 /* Work by Ibnu */
 //====================================================================================//
 
@@ -2295,8 +1891,12 @@ class Administrator extends CI_Controller {
     	$this->_validate_registrasi();
     	$data = array(
 				'nama' => $this->input->post('nama'),
-				'keterangan' => $this->input->post('keterangan'),
-				'type' => $this->input->post('tipe'),
+				'email' => $this->input->post('email'),
+				'username' => $this->input->post('username'),
+				'password' => $this->input->post('password'),
+				'jurusan' => $this->input->post('jurusan'),
+				'status_kartu' => $this->input->post('status_kartu'),
+				'status_terdaftar' => $this->input->post('status_terdaftar'),
 				'created' => date('Y-m-d H:i:s'),
 				'updated' => date('Y-m-d H:i:s')
 			);
@@ -2310,8 +1910,12 @@ class Administrator extends CI_Controller {
 		$this->_validate_registrasi();
 		$data = array(
 				'nama' => $this->input->post('nama'),
-				'keterangan' => $this->input->post('keterangan'),
-				'type' => $this->input->post('tipe'),
+				'email' => $this->input->post('email'),
+				'username' => $this->input->post('username'),
+				'password' => $this->input->post('password'),
+				'jurusan' => $this->input->post('jurusan'),
+				'status_kartu' => $this->input->post('status_kartu'),
+				'status_terdaftar' => $this->input->post('status_terdaftar'),
 				'updated' => date('Y-m-d H:i:s')
 			);
 
@@ -2340,16 +1944,40 @@ class Administrator extends CI_Controller {
 			$data['error_string'][] = 'Nama is required';
 			$data['status'] = FALSE;
 		}
-		if($this->input->post('keterangan') == '')
+		if($this->input->post('email') == '')
 		{
-			$data['inputerror'][] = 'keterangan';
-			$data['error_string'][] = 'Keterangan is required';
+			$data['inputerror'][] = 'email';
+			$data['error_string'][] = 'Email is required';
 			$data['status'] = FALSE;
 		}
-		if($this->input->post('tipe') == '')
+		if($this->input->post('password') == '')
 		{
-			$data['inputerror'][] = 'tipe';
-			$data['error_string'][] = 'Tipe is required';
+			$data['inputerror'][] = 'password';
+			$data['error_string'][] = 'Password is required';
+			$data['status'] = FALSE;
+		}
+		if($this->input->post('username') == '')
+		{
+			$data['inputerror'][] = 'username';
+			$data['error_string'][] = 'Username is required';
+			$data['status'] = FALSE;
+		}
+		if($this->input->post('jurusan') == '')
+		{
+			$data['inputerror'][] = 'jurusan';
+			$data['error_string'][] = 'Jurusan is required';
+			$data['status'] = FALSE;
+		}
+		if($this->input->post('status_kartu') == '')
+		{
+			$data['inputerror'][] = 'status_kartu';
+			$data['error_string'][] = 'Status Kartu is required';
+			$data['status'] = FALSE;
+		}
+		if($this->input->post('status_terdaftar') == '')
+		{
+			$data['inputerror'][] = 'status_terdaftar';
+			$data['error_string'][] = 'Status Terdaftar is required';
 			$data['status'] = FALSE;
 		}
 		if($data['status'] === FALSE)
@@ -2662,9 +2290,10 @@ class Administrator extends CI_Controller {
 
 	public function detail_kelas_data()
 	{
-    	$this->db->order_by('id', 'desc');
-    	$query = $this->db->get('detail_kelas');
-    	// $query = $this->db->query('SELECT * FROM users ORDER BY id DESC');
+    	// $this->db->order_by('id', 'desc');
+    	// $query = $this->db->get('detail_kelas');
+    	$query = $this->db->query('SELECT a.*,b.nama AS nama_jurusan FROM detail_kelas a 
+    								JOIN jurusan b ON (a.id_jurusan=b.id) ORDER BY a.id DESC');
     	$query = $query->result();
     	if (isset($query)) {
     		$status = 'success';
@@ -3251,7 +2880,194 @@ class Administrator extends CI_Controller {
 
 	}
 
+/*====================================================================================*/
+/* Akhir Model Guru */
+/*====================================================================================*/
+
+/*====================================================================================*/
+/* Mulai Model Jurusan */
+/* Work by Ibnu */
+/*====================================================================================*/
+
+	public function jurusan()
+	{
+		$take_akun = $this->Global_models->take_user($this->session->userdata('username'));
+		$data = array('username' => $take_akun);
+		$stat = $this->session->userdata('isLogin');
+
+		if (isset($stat)) {
+			$data['modules'] = 'jurusan';
+			$data['modals']	 = 'admin/modules/jurusan/jurusan_modal';
+			$data['content'] = 'admin/modules/jurusan/jurusan';
+			$this->load->view('admin/index', $data);
+		}else {
+			echo "<script> alert('Check your username and password!'); </script>";
+			$this->session->sess_destroy();
+			redirect(base_url(),'refresh');	
+		}
+	}
+
+	public function jurusan_data()
+	{
+    	$this->db->order_by('id', 'desc');
+    	$query = $this->db->get('jurusan');
+    	// $query = $this->db->query('SELECT * FROM jurusans ORDER BY id DESC');
+    	$query = $query->result();
+    	if (isset($query)) {
+    		$status = 'success';
+    		$query = $query;
+    	}else {
+    		$status = 'error';
+    		$query = 'error';
+    	}
+    	header('Content-Type: application/json');
+    	echo json_encode(array('status' => $status, 'data' => $query));
+	}
+
+    public function jurusan_edit_data($id)
+    {
+    	$this->db->from('jurusan');
+			$this->db->where('id',$id);
+			$query = $this->db->get();
+			if (isset($query)) {
+    		$status = 'success';
+    		$query = $query;
+    	}else {
+    		$status = 'error';
+    		$query = 'error';
+    	}
+    	$query = $query->row();
+    	header('Content-Type: application/json');
+    	echo json_encode(array('status' => $status, 'data' => $query));
+    }
+
+	public function jurusan_insert_data()
+	{
+		$this->_validate_jurusan();
+
+		$data = array(
+				'nama' => $this->input->post('nama'),
+				'detail_jurusan' => $this->input->post('detail_jurusan'),
+				'created' => $this->input->post('created'),
+				'updated' => $this->input->post('updated'),
+			);
+
+		if(!empty($_FILES['gambar']['name']))
+		{
+			$upload = $this->jurusan_do_upload();
+			$data['lambang_jurusan'] = $upload;
+		}
+
+		$dbInsert = $this->db->insert('jurusan', $data);
+		echo json_encode(array('status' => TRUE));
+	}
+
+	public function jurusan_update_data()
+	{
+		$this->_validate_jurusan();
+		$data = array(
+				'nama' => $this->input->post('nama'),
+				'detail_jurusan' => $this->input->post('detail_jurusan'),
+				'updated' => $this->input->post('updated'),
+			);
+
+		if($this->input->post('remove_gambar')) // if remove photo_jurusan checked
+		{
+			if(file_exists('public/admin/img/jurusan/'.$this->input->post('remove_gambar')) && $this->input->post('remove_gambar'))
+				unlink('public/admin/img/jurusan/'.$this->input->post('remove_gambar'));
+			$data['lambang_jurusan'] = '';
+		}
+
+		if(!empty($_FILES['gambar']['name']))
+		{
+			$upload = $this->jurusan_do_upload();
+
+			//delete file
+			$jurusan = $this->Global_models->jurusan_get_by_id($this->input->post('id'));
+			if(file_exists('public/admin/img/jurusan/'.$jurusan->lambang_jurusan) && $jurusan->lambang_jurusan)
+				unlink('public/admin/img/jurusan/'.$jurusan->lambang_jurusan);
+
+			$data['lambang_jurusan'] = $upload;
+		}
+
+		$this->db->where('id', $this->input->post('id'));
+		$this->db->update('jurusan', $data);
+		echo json_encode(array('status' => TRUE));
+	}
+
+	public function jurusan_delete_data($id)
+	{
+		//delete file
+		$jurusan = $this->Global_models->jurusan_get_by_id($id);
+		if(file_exists('public/admin/img/jurusan/'.$jurusan->lambang_jurusan) && $jurusan->lambang_jurusan)
+			unlink('public/admin/img/jurusan/'.$jurusan->lambang_jurusan);
+
+		$this->db->where('id', $id);
+    	$this->db->delete('jurusan');
+    	echo json_encode(array("status" => TRUE));
+	}
+
+	private function jurusan_do_upload()
+	{
+		$config['upload_path']          = 'public/admin/img/jurusan/';
+        $config['allowed_types']        = 'gif|jpg|png';
+        $config['max_size']             = 1000; //set max size allowed in Kilobyte
+        $config['max_width']            = 1000; // set max width image allowed
+        $config['max_height']           = 1000; // set max height allowed
+        $config['file_name']            = round(microtime(true) * 1000); //just milisecond timestamp fot unique name
+
+        $this->upload->initialize($config);
+        $this->load->library('upload', $config);
+
+        if(!$this->upload->do_upload('gambar')) //upload and validate
+        {
+            $data['inputerror'][] = 'gambar';
+			$data['error_string'][] = 'Upload error: '.$this->upload->display_errors('',''); //show ajax error
+			$data['status'] = FALSE;
+			echo json_encode($data);
+			exit();
+		}
+		return $this->upload->data('file_name');
+	}
+
+    // Untuk Validasi
+    private function _validate_jurusan()
+	{
+		$data = array();
+		$data['error_string'] = array();
+		$data['inputerror'] = array();
+		$data['status'] = TRUE;
+
+		if($this->input->post('nama') == '')
+		{
+			$data['inputerror'][] = 'nama';
+			$data['error_string'][] = 'Nama is required';
+			$data['status'] = FALSE;
+		}
+
+		if($this->input->post('detail_jurusan') == '')
+		{
+			$data['inputerror'][] = 'detail_jurusan';
+			$data['error_string'][] = 'Detail Jurusan is required ';
+			$data['status'] = FALSE;
+		}
+
+		// if($this->input->post('gambar') == '')
+		// {
+		// 	$data['inputerror'][] = 'gambar';
+		// 	$data['error_string'][] = 'Lambang Jurusan is required';
+		// 	$data['status'] = FALSE;
+		// }
+
+		if($data['status'] === FALSE)
+		{
+			echo json_encode($data);
+			exit();
+		}
+
+	}
+
 /*===============================================================================================*/
-/* Akhir Model User */
+/* Akhir Model Guru */
 /*===============================================================================================*/
 }

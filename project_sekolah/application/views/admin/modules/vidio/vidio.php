@@ -23,7 +23,6 @@
                                         <tr>
                                             <th>Nama</th>
                                             <th>Link Vidio</th>
-                                            <th>Kategori Vidio</th>
                                             <th width="15%">Aksi</th>
                                         </tr>
                                     </thead>

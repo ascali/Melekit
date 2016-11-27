@@ -29,9 +29,9 @@
                                             <th>Nama</th>
                                             <th>Email</th>
                                             <th>Username</th>
-                                            <th>Password</th>
                                             <th>Jurusan</th>
-                                            <th>Status</th>
+                                            <th>Status Cetak Kartu</th>
+                                            <th>Status Terdaftar</th>
                                             <th width="15%">Aksi</th>
                                         </tr>
                                     </thead>

@@ -1,14 +1,14 @@
             <div id="promo-slider" class="slider flexslider">
                 <ul class="slides">
                 <?php 
-                    foreach ($data as $v):
+                    foreach ($data as $gambar_slide):
                 ?>
                     <li>
-                        <img src="<?php echo base_url('public/admin/img/gambar/'); ?><?php echo $v->file; ?>" alt="Logo">
+                        <img src="<?php echo base_url('public/admin/img/galeri/'); ?><?php echo $gambar_slide->file; ?>" alt="" width="5%" heigth="10px">
                         <p class="flex-caption">
-                            <span class="main" ><?php echo $v->nama; ?></span>
+                            <span class="main" ><?php echo $gambar_slide->nama; ?></span>
                             <br />
-                            <span class="secondary clearfix" ><?php echo $v->keterangan; ?></span>
+                            <span class="secondary clearfix" ><?php echo $gambar_slide->keterangan; ?></span>
                         </p>
                     </li>
                     
@@ -21,11 +21,11 @@
 
             <section class="promo box box-dark">        
                 <div class="col-md-9">
-                <h1 class="section-heading">Why College Green</h1>
+                <h1 class="section-heading">Why </h1>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed bibendum orci eget nulla mattis, quis viverra tellus porta. Donec vitae neque ut velit eleifend commodo. Maecenas turpis odio, placerat eu lorem ut, suscipit commodo augue.  </p>   
                 </div>  
                 <div class="col-md-3">
-                    <a class="btn btn-cta" href="#"><i class="fa fa-play-circle"></i>Apply Now</a>  
+                    <a class="btn btn-cta" href="#"><i class="fa fa-play-circle"></i>Daftar Sekarang</a>  
                 </div>
             </section>
             <!--//promo-->

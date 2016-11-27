@@ -75,8 +75,16 @@
             </div><!--//to-bar-->
             <div class="header-main container">
               <div class="col-md-12">
-                  <div class="col-md-2">
-                  
+                  <div class="info col-md-2">
+                  <div class="img-responsive">
+                  <img src="<?php echo base_url('public/admin/img/profil/'); ?>polindra.png" width="50%" alt="Logo">
+                        
+                  </div>
+
+                  </div>
+                  <div class="col-md-4">
+                  <strong><h3>SMK N 1 BALONGAN</h3></strong>
+                  </div>
                   <div class="info col-md-6 col-sm-6">
                       <ul class="menu-top navbar-right">
                           <!-- <li class="divider"><a href="#" >Home</a></li> -->

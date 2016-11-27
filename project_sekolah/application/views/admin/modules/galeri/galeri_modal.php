@@ -30,15 +30,28 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-3">Tipe</label>
+                            <label class="control-label col-md-3">Status Banner</label>
                             <div class="col-md-9">
-                            <select name="tipe" class="form-control">
-                                <option value="">-Pilih Tipe-</option>
-                                <option value="Gambar">Gambar</option>
-                                <option value="Video">Vidio</option>
-                                option
+                            <select name="banner" class="form-control">
+                                <option value="">-Pilih Status Banner-</option>
+                                <option value="Iya">Banner</option>
+                                <option value="Tidak">Bukan Banner</option>
                             </select>
                                 <!-- <input type="text" name="tipe" max="20" maxlength="20" placeholder="Wali Kelas" class="form-control" required=""> -->
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                        <div class="form-group" id="file">
+                            <label class="control-label col-md-3">Gambar</label>
+                            <div class="col-md-9">
+                                (No photo)
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3" id="label-photo">Upload Gambar Galeri </label>
+                            <div class="col-md-9">
+                                <input name="file" type="file">
                                 <span class="help-block"></span>
                             </div>
                         </div>

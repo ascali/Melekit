@@ -14,7 +14,7 @@ class Index extends CI_Controller {
 		$data['modules'] = 'index';
 		$data['content'] = 'user/menu/home';
 		$data['datas']   = $this->db->query('SELECT * FROM profil WHERE id=1')->result_object();
-		// $data['data']    = $this->db->query('SELECT * FROM gambar WHERE status_slide=1')->result_object();
+		$data['data']    = $this->db->query('SELECT * FROM galeri WHERE banner="Iya"')->result_object();
 		$this->load->view('user/index', $data);
 	}
 

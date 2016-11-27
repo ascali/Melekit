@@ -1,49 +1,31 @@
-
-<div id="promo-slider" class="slider flexslider">
-    <ul class="slides">
-        <li>
-            <img src="<?php echo base_url('public/user/test/images/slides/slide-1.jpg'); ?>"  alt="" />
-            <p class="flex-caption">
-                <span class="main" >Join College Green Online</span>
-                <br />
-                <span class="secondary clearfix" >Choose from over 100 online and offline courses</span>
-            </p>
-        </li>
-        <li>
-            <img src="<?php echo base_url('public/user/test/images/slides/slide-2.jpg'); ?>"  alt="" />
-            <p class="flex-caption">
-                <span class="main" >Come to our Open Days</span>
-                <br />
-                <span class="secondary clearfix" >Donec accumsan nunc sed ipsum dapibus consectetur</span>
-            </p>
-        </li>
-        <li>
-            <img src="<?php echo base_url('public/user/test/images/slides/slide-3.jpg'); ?>"  alt="" />
-            <p class="flex-caption">
-                <span class="main" >Discover online courses</span>
-                <br />
-                <span class="secondary clearfix" >Lorem ipsum dolor sit amet, consectetur adipiscing elit</span>
-            </p>
-        </li>
-        <li>
-            <img src="<?php echo base_url('public/user/test/images/slides/slide-4.jpg'); ?>"  alt="" />
-            <p class="flex-caption">
-                <span class="main" >Nam ultricies accumsan pellentesque</span>
-                <br />
-                <span class="secondary clearfix" >In justo orci, ornare vitae nulla sed, suscipit suscipit augue</span>
-            </p>
-        </li>
-    </ul><!--//slides-->
-</div>
-<!--//flexslider-->
+            <div id="promo-slider" class="slider flexslider">
+                <ul class="slides">
+                <?php 
+                    foreach ($data as $gambar_slide):
+                ?>
+                    <li>
+                        <img src="<?php echo base_url('public/admin/img/galeri/'); ?><?php echo $gambar_slide->file; ?>" alt="" width="5%" heigth="10px">
+                        <p class="flex-caption">
+                            <span class="main" ><?php echo $gambar_slide->nama; ?></span>
+                            <br />
+                            <span class="secondary clearfix" ><?php echo $gambar_slide->keterangan; ?></span>
+                        </p>
+                    </li>
+                    
+                <?php 
+                    endforeach;
+                ?>
+                </ul>
+            </div>
+            <!--//flexslider-->
 
             <section class="promo box box-dark">        
                 <div class="col-md-9">
-                <h1 class="section-heading">Why College Green</h1>
+                <h1 class="section-heading">Why </h1>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed bibendum orci eget nulla mattis, quis viverra tellus porta. Donec vitae neque ut velit eleifend commodo. Maecenas turpis odio, placerat eu lorem ut, suscipit commodo augue.  </p>   
                 </div>  
                 <div class="col-md-3">
-                    <a class="btn btn-cta" href="#"><i class="fa fa-play-circle"></i>Apply Now</a>  
+                    <a class="btn btn-cta" href="#"><i class="fa fa-play-circle"></i>Daftar Sekarang</a>  
                 </div>
             </section>
             <!--//promo-->
