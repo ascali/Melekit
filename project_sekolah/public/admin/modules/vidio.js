@@ -16,12 +16,9 @@ $(document).ready(function(){
 			    				"data": "nama"
 			    			},
                             {
-                                "data": "path"
+                                "data": "link"
                             },
 
-                            {
-                                "data": "nama_galeri"
-                            },
 			    			{
 			    				"data": null,
 			    				"mRender": function(data, type, row){
@@ -57,16 +54,6 @@ function add()
     $('#modal_form').modal('show'); // show bootstrap modal
     $('.modal-title').text('Form Input Vidio'); // Set Title to Bootstrap modal title
 
-    // Select Galeri
-    var isi="";
-    $.getJSON(base_url+"administrator/galeri_data", function(json){
-        var isiKosong='<option value="">-Pilih Galeri-</option>';
-        $('#id_galeri').html(isiKosong);
-        for (var a = 0; a < json.data.length; a++) {
-            isi = '<option value="'+json.data[a].id+'">'+json.data[a].nama+'</option>'; 
-        };
-        $('#id_galeri').append(isi);
-    });
 }
 
 function edit(id)
@@ -78,7 +65,7 @@ function edit(id)
 
     //Ajax Load data from ajax
     $.ajax({
-        url : "http://localhost/project_sekolah/administrator/submenu_edit_data/" + id,
+        url : "http://localhost/project_sekolah/administrator/vidio_edit_data/" + id,
         type: "GET",
         dataType: "JSON",
         success: function(dataRow)
@@ -86,8 +73,7 @@ function edit(id)
 
             $('[name="id"]').val(dataRow.data.id);
             $('[name="nama"]').val(dataRow.data.nama);
-            $('[name="href"]').val(dataRow.data.path);
-            $('[name="id_kategori"]').val(dataRow.data.id_kategori_vidio);
+            $('[name="link"]').val(dataRow.data.link);
             $('#modal_form').modal('show'); // show bootstrap modal when complete loaded
             $('.modal-title').text('Form Edit Vidio'); // Set title to Bootstrap modal title
 

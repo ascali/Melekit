@@ -1,49 +1,59 @@
 var save_method; //for save method string
-var table;
+var table,select_galeri;
+var base_url = 'http://localhost/project_sekolah/';
 
 $(document).ready(function(){
 
-	 table = $('#galeri').DataTable( {
-		"processing": true,
-		"order": [],
-			"ajax": {
-						"url": "http://localhost/project_sekolah/administrator/galeri_data",
-				        "type": "POST"
-		        	},
-		    "aoColumns": [	
-		    				{
-			    				"data": "nama"
-			    			}, 
-			    			{
-			    				"data": "keterangan"
-			    			},
+     table = $('#galeri').DataTable( {
+        "processing": true,
+        "order": [],
+            "ajax": {
+                        "url": "http://localhost/project_sekolah/administrator/galeri_data",
+                        "type": "POST"
+                    },
+            "aoColumns": [
                             {
-                                "data": "type"
-                            }, 
-			    			{
-			    				"data": null,
-			    				"mRender": function(data, type, row){
-			    					var id = row.id;
-									var action = edit ? '<a href="#" onclick="edit('+id+',true);"><button class="btn btn-sm btn-warning">&nbsp; Edit &nbsp;</button></a>' : '';
-									action += edit && del ? '&nbsp;&nbsp;' : '';
-									action += del ? '<a href="#" onclick="del('+id+',true);"><button class="btn btn-sm btn-danger">Delete</button></a>' : '';
-									action += action == '' ? 'No Action' : '';
-									return action;	
-			    				}
-			    			}
-			       			// {
-			       			// 	"targets": -1,
-			       			// 	"defaultContent": "<button class='btn btn-xs btn-info' onclick='test()'>edit</button><button class='btn btn-xs btn-danger' onclick='test()'>delete</button>"
-			       			// }
-					   ]
-	});
+                                "data": "nama"
+                            },
+                            {
+                                "data": "keterangan"
+                            },
+                            {
+                                "data": "banner"
+                            },
+                            {
+                              "data": null,
+                              "mRender": function(data, type, row){
+                              var file = row.file;
+                              var img_file = file ? '<img src="http://localhost/project_sekolah/public/admin/img/galeri/'+file+'" class="img-responsive" style="width:50%;">' : '';
+                              img_file += img_file == '' ? 'Tidak Ada Photo' : '';
+                              return img_file;
+                              }
+                            },
+                            {
+                                "data": null,
+                                "mRender": function(data, type, row){
+                                    var id = row.id;
+                                    var action = edit ? '<a href="#" onclick="edit('+id+',true);"><button class="btn btn-sm btn-warning">&nbsp; Edit &nbsp;</button></a>' : '';
+                                    action += edit && del ? '&nbsp;&nbsp;' : '';
+                                    action += del ? '<a href="#" onclick="del('+id+',true);"><button class="btn btn-sm btn-danger">Delete</button></a>' : '';
+                                    action += action == '' ? 'No Action' : '';
+                                    return action;
+                                }
+                            }
+                            // {
+                            //  "targets": -1,
+                            //  "defaultContent": "<button class='btn btn-xs btn-info' onclick='test()'>edit</button><button class='btn btn-xs btn-danger' onclick='test()'>delete</button>"
+                            // }
+                       ]
+    });
 
 });
 
 function reload_table()
 {
   // window.location.reload()
-  table.ajax.reload(null,false); //reload datatable ajax 
+  table.ajax.reload(null,false); //reload datatable ajax
 }
 
 function add()
@@ -54,8 +64,9 @@ function add()
     $('.help-block').empty(); // clear error string
     $('#modal_form').modal('show'); // show bootstrap modal
     $('.modal-title').text('Form Input Galeri'); // Set Title to Bootstrap modal title
+    $('#file').hide(); // hide photo preview modal
+    $('#label-photo').text('Upload Photo'); // label photo upload
     $('#btnSave').text('Save');
-
 }
 
 function edit(id)
@@ -64,8 +75,8 @@ function edit(id)
     $('#form')[0].reset(); // reset form on modals
     $('.form-group').removeClass('has-error'); // clear error class
     $('.help-block').empty(); // clear error string
-    $('.update-button').text('update');
-    $('#btnSave').text('Update');
+    $('.update-button').text('Update');
+
 
     //Ajax Load data from ajax
     $.ajax({
@@ -78,14 +89,81 @@ function edit(id)
             $('[name="id"]').val(dataRow.data.id);
             $('[name="nama"]').val(dataRow.data.nama);
             $('[name="keterangan"]').val(dataRow.data.keterangan);
-            $('[name="tipe"]').val(dataRow.data.tipe);
+            $('[name="banner"]').val(dataRow.data.banner);
+            
             $('#modal_form').modal('show'); // show bootstrap modal when complete loaded
             $('.modal-title').text('Form Edit galeri'); // Set title to Bootstrap modal title
 
+            $('#file').show(); // show photo preview modal
+
+            if(dataRow.data.file)
+            {
+                $('#label-photo').text('Change Photo'); // label photo upload
+                $('#file div').html('<img src="'+base_url+'public/admin/img/galeri/'+dataRow.data.file+'" class="img-responsive" width="30%">'); // show photo
+                $('#file div').append('<input type="checkbox" name="remove_file" value="'+dataRow.data.file+'"/> Remove photo when saving'); // remove photo
+                $('#modalFixed').addClass('modal-bodys');
+            }
+            else
+            {
+                $('#label-photo').text('Upload Photo'); // label photo upload
+                $('#file div').text('(No photo)');
+            }
         },
         error: function (jqXHR, textStatus, errorThrown)
         {
             alert('Error get data from ajax');
+        }
+    });
+}
+
+function save()
+{
+    $('#btnSave').text('saving...'); //change button text
+    $('#btnSave').attr('disabled',true); //set button disable
+    var url;
+
+    if(save_method == 'add') {
+        url = "http://localhost/project_sekolah/administrator/galeri_add";
+    } else {
+        url = "http://localhost/project_sekolah/administrator/galeri_update";
+    }
+
+    // ajax adding data to database
+
+    var formData = new FormData($('#form')[0]);
+    $.ajax({
+        url : url,
+        type: "POST",
+        data: formData,
+        contentType: false,
+        processData: false,
+        dataType: "JSON",
+        success: function(data)
+        {
+
+            if(data.status) //if success close modal and reload ajax table
+            {
+                $('#modal_form').modal('hide');
+                alert('Sukses menyimpan data');
+                reload_table();
+            }
+            else
+            {
+                for (var i = 0; i < data.inputerror.length; i++)
+                {
+                    $('[name="'+data.inputerror[i]+'"]').parent().parent().addClass('has-error'); //select parent twice to select div form-group class and add has-error class
+                    $('[name="'+data.inputerror[i]+'"]').next().text(data.error_string[i]); //select span help-block class set text error string
+                }
+            }
+            $('#btnSave').text('save'); //change button text
+            $('#btnSave').attr('disabled',false); //set button enable
+        },
+        error: function (jqXHR, textStatus, errorThrown)
+        {
+            alert('Error adding / update data');
+            $('#btnSave').text('save'); //change button text
+            $('#btnSave').attr('disabled',false); //set button enable
+
         }
     });
 }
@@ -96,7 +174,7 @@ function del(id)
     {
         // ajax delete data to database
         $.ajax({
-            url : "http://localhost/project_sekolah/administrator/galeri_delete_data/"+ id,
+            url : "http://localhost/project_sekolah/administrator/galeri_delete/"+ id,
             type: "POST",
             dataType: "JSON",
             success: function(dataRow)
@@ -114,52 +192,4 @@ function del(id)
         });
 
     }
-}
-
-function save()
-{
-    $('#btnSave').text('saving...'); //change button text
-    $('#btnSave').attr('disabled',true); //set button disable 
-    var url;
-
-    if(save_method == 'add') {
-        url = "http://localhost/project_sekolah/administrator/galeri_insert_data";
-    } else {
-        url = "http://localhost/project_sekolah/administrator/galeri_update_data";
-    }
-
-    // ajax adding data to database
-    $.ajax({
-        url : url,
-        type: 'POST',
-        data: $('#form').serialize(),
-        dataType: 'JSON',
-        success: function(data)
-        {
-            if(data.status) //if success close modal and reload ajax table
-            {
-                $('#modal_form').modal('hide');
-                reload_table();
-            }
-            else
-            {
-                for (var i = 0; i < data.inputerror.length; i++) 
-                {
-                    $('[name="'+data.inputerror[i]+'"]').parent().parent().addClass('has-error'); //select parent twice to select div form-group class and add has-error class
-                    $('[name="'+data.inputerror[i]+'"]').next().text(data.error_string[i]); //select span help-block class set text error string
-                }
-            }
-            $('#btnSave').text('save'); //change button text
-            $('#btnSave').attr('disabled',false); //set button enable 
-
-            // alert('Success Saving Data Nasabah');
-        },
-        error: function (jqXHR, textStatus, errorThrown)
-        {
-            alert('Error adding / update data');
-            $('#btnSave').text('save'); //change button text
-            $('#btnSave').attr('disabled',false); //set button enable 
-
-        }
-    });
 }

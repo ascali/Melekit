@@ -1,5 +1,6 @@
 var save_method; //for save method string
-var table;
+var table, select_jurusan;
+var base_url='http://localhost/project_sekolah/administrator/';
 
 $(document).ready(function(){
 
@@ -12,16 +13,16 @@ $(document).ready(function(){
                     },
             "aoColumns": [  
                             {
-                                "data": "nama"
+                                "data": "nis"
                             },
                             {
-                                "data": "nis"
+                                "data": "nama"
                             },
                             {
                                 "data": "kelas"
                             }, 
                             {
-                                "data": "id_jurusan"
+                                "data": "nama_jurusan"
                             }, 
                             {
                                 "data": null,
@@ -40,18 +41,17 @@ $(document).ready(function(){
                             // }
                        ]
     });
-
-// fungsi Select
-var isi = '';
-$.getJSON("http://localhost/project_sekolah/administrator/kelas_data", function(json){
+     // Select Jurusan
+    $.getJSON(base_url+"jurusan_data", function(result){
+            var isiKosong='<option value="">-Pilih Jurusan-</option>';
+            $('#jurusan').html(isiKosong);
+            for (var i = 0; i < result.data.length; i++) {
+                select_jurusan += '<option value="'+result.data[i].id+'">'+result.data[i].nama+'</option>';
             
-            var isiKosong='<option value="">-Pilih Kelas-</option>';
-            $('#id_kelas').html(isiKosong);
-                    for (var a = 0; a < json.data.length; a++) {
-                        isi = '<option value="'+json.data[a].id+'">'+json.data[a].nama+'</option>'; 
-                    };
-                    $('#id_kelas').append(isi);
-    });
+            }
+            $('#jurusan').append(select_jurusan);
+  });
+
 });
 
 function reload_table()

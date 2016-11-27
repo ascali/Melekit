@@ -1,5 +1,6 @@
 var save_method; //for save method string
-var table;
+var table, select_jurusan;
+var base_url='http://localhost/project_sekolah/administrator/';
 
 $(document).ready(function(){
 
@@ -15,7 +16,7 @@ $(document).ready(function(){
                                 "data": "kelas"
                             },
                             {
-                                "data": "id_jurusan"
+                                "data": "nama_jurusan"
                             },
                             {
                                 "data": "jumlah_room"
@@ -43,6 +44,16 @@ $(document).ready(function(){
 			       			// }
 					   ]
 	});
+     // Select Jurusan
+    $.getJSON(base_url+"jurusan_data", function(result){
+            var isiKosong='<option value="">-Pilih Jurusan-</option>';
+            $('#jurusan').html(isiKosong);
+            for (var i = 0; i < result.data.length; i++) {
+                select_jurusan += '<option value="'+result.data[i].id+'">'+result.data[i].nama+'</option>';
+            
+            }
+            $('#jurusan').append(select_jurusan);
+  });
 
 });
 

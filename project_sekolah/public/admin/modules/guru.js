@@ -129,7 +129,7 @@ function edit(id)
                 $('#label-photo').text('Change Photo'); // label photo upload
                 $('#foto div').html('<img src="'+base_url+'public/admin/img/guru/'+dataRow.data.foto+'" class="img-responsive" width="30%">'); // show photo
                 $('#foto div').append('<input type="checkbox" name="remove_foto" value="'+dataRow.data.foto+'"/> Remove photo when saving'); // remove photo
-								$('#modalFixed').addClass('modal-bodys');
+				$('#modalFixed').addClass('modal-bodys');
             }
             else
             {

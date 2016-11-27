@@ -18,7 +18,13 @@ $(document).ready(function(){
                                 "data": "detail_jurusan"
                             },
                             {
-                                "data": "lambang_jurusan"
+                              "data": null,
+                              "mRender": function(data, type, row){
+                              var lambang_jurusan = row.lambang_jurusan;
+                              var img_lambang_jurusan = lambang_jurusan ? '<img src="http://localhost/project_sekolah/public/admin/img/jurusan/'+lambang_jurusan+'" class="img-responsive" style="width:50%;">' : '';
+                              img_lambang_jurusan += img_lambang_jurusan == '' ? 'Tidak Ada Photo' : '';
+                              return img_lambang_jurusan;
+                              }
                             },
                             {
                                 "data": null,
@@ -70,7 +76,7 @@ function edit(id)
     $('#form')[0].reset(); // reset form on modals
     $('.form-group').removeClass('has-error'); // clear error class
     $('.help-block').empty(); // clear error string
-    $('#btnSave').text('update');
+    $('#btnSave').text('Update');
 
     //Ajax Load data from ajax
     $.ajax({
@@ -134,11 +140,14 @@ function save()
     }
 
     // ajax adding data to database
+    var formData = new FormData($('#form')[0]);
     $.ajax({
         url : url,
-        type: 'POST',
-        data: $('#form').serialize(),
-        dataType: 'JSON',
+        type: "POST",
+        data: formData,
+        contentType: false,
+        processData: false,
+        dataType: "JSON",
         success: function(data)
         {
             if(data.status) //if success close modal and reload ajax table

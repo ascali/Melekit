@@ -1,5 +1,6 @@
 var save_method; //for save method string
-var table;
+var table, select_jurusan;
+var base_url='http://localhost/project_sekolah/administrator/';
 
 $(document).ready(function(){
 
@@ -7,7 +8,7 @@ $(document).ready(function(){
         "processing": true,
         "order": [],
             "ajax": {
-                        "url": "http://localhost/project_sekolah/administrator/komen_data",
+                        "url": "http://localhost/project_sekolah/administrator/registrasi_data",
                         "type": "POST"
                     },
             "aoColumns": [  
@@ -15,31 +16,47 @@ $(document).ready(function(){
                                 "data": "nama"
                             },
                             {
-                                "data": "username"
-                            }, 
+                                "data": "email"
+                            },
                             {
-                                "data": "password"
+                                "data": "username"
                             }, 
                             {
                                 "data": "jurusan"
                             },
                             {
-                                "data": "email"
-                            },
-
-                            {
-                                "data": "status"
-                            },
+                                "data": null,
+                                "mRender": function(data, type, row){
+                                    if (row.status_terdaftar==1) {
+                                        var id = row.id;
+                                        var action = edit ? '<a href="#" onclick="editStatusKartu'+id+',true);"> Tunggu </a>' : '';
+                                        // action += edit && del ? '&nbsp;&nbsp;' : '';
+                                        return 'Cetak &nbsp; || '+action;
+                                    }else{
+                                        var id = row.id;
+                                        var action = edit ? '<a href="#" onclick="editStatusKartu('+id+',true);"> Cetak </a>' : '';
+                                        // action += edit && del ? '&nbsp;&nbsp;' : '';
+                                        return 'Tunggu &nbsp; || &nbsp;'+action;
+                                    }
+                                }
+                            }, 
                             {
                                 "data": null,
-                                "mRender" :function(data, type, row){
-                                    if (row.status_publish == 1) {
-                                        return "Aktif";
+                                "mRender": function(data, type, row){
+                                    if (row.status_terdaftar==1) {
+                                        var id = row.id;
+                                        var action = edit ? '<a href="#" onclick="editStatusDaftar('+id+',true);">&nbsp; Tunggu &nbsp;</a>' : '';
+                                        // action += edit ? : '';
+                                        return 'Lulus &nbsp; || '+action;
                                     }else{
-                                        return "Tidak Aktif";
-                                    };
+                                        var id = row.id;
+                                        var action = edit ? '<a href="#" onclick="editStatusDaftar('+id+',true);">&nbsp; Lulus &nbsp;</a>' : '';
+                                        // action += edit ? : '';
+                                        return 'Tunggu &nbsp; || '+action;
+                                    }
                                 }
-                            },
+                            }, 
+
                             {
                                 "data": null,
                                 "mRender": function(data, type, row){
@@ -53,6 +70,17 @@ $(document).ready(function(){
                             }
                        ]
     });
+
+    // Select Jurusan
+    $.getJSON(base_url+"jurusan_data", function(result){
+            var isiKosong='<option value="">-Pilih Jurusan-</option>';
+            $('#jurusan').html(isiKosong);
+            for (var i = 0; i < result.data.length; i++) {
+                select_jurusan += '<option value="'+result.data[i].id+'">'+result.data[i].nama+'</option>';
+            
+            }
+            $('#jurusan').append(select_jurusan);
+  });
 
 });
 
@@ -69,7 +97,7 @@ function add()
     $('.form-group').removeClass('has-error'); // clear error class
     $('.help-block').empty(); // clear error string
     $('#modal_form').modal('show'); // show bootstrap modal
-    $('.modal-title').text('Form Input Komen'); // Set Title to Bootstrap modal title
+    $('.modal-title').text('Form Input Registrasi'); // Set Title to Bootstrap modal title
     $('#btnSave').text('Save');
 
 }
@@ -84,20 +112,22 @@ function edit(id)
 
     //Ajax Load data from ajax
     $.ajax({
-        url : "http://localhost/project_sekolah/administrator/komen_edit_data/" + id,
+        url : "http://localhost/project_sekolah/administrator/registrasi_edit_data/" + id,
         type: "GET",
         dataType: "JSON",
         success: function(dataRow)
         {
 
             $('[name="id"]').val(dataRow.data.id);
-            $('[name="oleh"]').val(dataRow.data.oleh);
+            $('[name="nama"]').val(dataRow.data.nama);
             $('[name="email"]').val(dataRow.data.email);
-            $('[name="date"]').val(dataRow.data.date);
-            $('[name="isi"]').val(dataRow.data.isi);
-            $('[name="status"]').val(dataRow.data.status_publish);
+            $('[name="username"]').val(dataRow.data.username);
+            $('[name="password"]').val(dataRow.data.password);
+            $('[name="jurusan"]').val(dataRow.data.jurusan);
+            $('[name="status_kartu"]').val(dataRow.data.status_kartu);
+            $('[name="status_terdaftar"]').val(dataRow.data.status_terdaftar);
             $('#modal_form').modal('show'); // show bootstrap modal when complete loaded
-            $('.modal-title').text('Form Edit Komen'); // Set title to Bootstrap modal title
+            $('.modal-title').text('Form Edit registrasi'); // Set title to Bootstrap modal title
 
         },
         error: function (jqXHR, textStatus, errorThrown)
@@ -113,7 +143,7 @@ function del(id)
     {
         // ajax delete data to database
         $.ajax({
-            url : "http://localhost/project_sekolah/administrator/komen_delete_data/"+ id,
+            url : "http://localhost/project_sekolah/administrator/registrasi_delete_data/"+ id,
             type: "POST",
             dataType: "JSON",
             success: function(dataRow)
@@ -121,7 +151,7 @@ function del(id)
                 //if success reload ajax table
                 $('#modal_form').modal('hide');
                 reload_table();
-                alert('Success Delete Data Komen');
+                alert('Success Delete Data registrasi');
 
             },
             error: function (jqXHR, textStatus, errorThrown)
@@ -140,9 +170,9 @@ function save()
     var url;
 
     if(save_method == 'add') {
-        url = "http://localhost/project_sekolah/administrator/komen_insert_data";
+        url = "http://localhost/project_sekolah/administrator/registrasi_insert_data";
     } else {
-        url = "http://localhost/project_sekolah/administrator/komen_update_data";
+        url = "http://localhost/project_sekolah/administrator/registrasi_update_data";
     }
 
     // ajax adding data to database
