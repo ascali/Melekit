@@ -17,6 +17,15 @@
     <link rel="stylesheet" href="<?php echo base_url('public/user/test/plugins/font-awesome/css/font-awesome.css'); ?>">
     <link rel="stylesheet" href="<?php echo base_url('public/user/test/plugins/flexslider/flexslider.css'); ?>">
     <link rel="stylesheet" href="<?php echo base_url('public/user/test/plugins/pretty-photo/css/prettyPhoto.css'); ?>">
+    <!-- Calendar -->
+    <link href="<?php echo base_url('public/admin/bower_components/datatables-responsive/css/dataTables.responsive.css'); ?>" rel="stylesheet">
+
+    <!-- Core CSS File. The CSS code needed to make eventCalendar works -->
+    <link rel="stylesheet" href="<?=base_url()?>public/user/test/plugins/calendar-jquery/css/eventCalendar.css">
+
+    <!-- Theme CSS file: it makes eventCalendar nicer -->
+    <link rel="stylesheet" href="<?=base_url()?>public/user/test/plugins/calendar-jquery/css/eventCalendar_theme_responsive.css">
+
     <!-- Theme CSS -->
     <link id="theme-style" rel="stylesheet" href="<?php echo base_url('public/user/test/css/styles.css'); ?>">
 
@@ -90,7 +99,7 @@
                           <!-- <li class="divider"><a href="#" >Home</a></li> -->
                           <li class="divider"><a href="#" data-toggle="modal" data-target="#modalLogin">Login</a></li>
                           <li class="divider"><a href="faq.html">FAQ</a></li>
-                          <li><a href="contact.html">Contact</a></li>
+                          <li><a href="<?=base_url('index/kontak');?>">Contact</a></li>
                       </ul><!--//menu-top-->
                       <br />
                   </div><!--//info-->
@@ -99,7 +108,7 @@
         </header><!--//header-->
 
         <!-- Start Navbar -->
-            <?php $this->load->view('user/nav'); ?>
+            <?php $this->load->view('user/menu/nav'); ?>
         <!-- End Navbar -->
 
         <!-- ******CONTENT****** -->
@@ -248,6 +257,11 @@
     <!-- End Modal Login -->
     <!-- Javascript -->
     <script type="text/javascript" src="<?php echo base_url('public/user/test/plugins/jquery-1.12.3.min.js'); ?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('public/paging/js/jquery.paginate.js'); ?>"></script>
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url('public/source/jquery.fancybox.css?v=2.1.5'); ?>" media="screen" />
+    <script type="text/javascript" src="<?php echo base_url('public/source/jquery.fancybox.js?v=2.1.5'); ?>"></script>
+        
+
     <script type="text/javascript" src="<?php echo base_url('public/user/test/plugins/bootstrap/js/bootstrap.min.js'); ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('public/user/test/plugins/bootstrap-hover-dropdown.min.js'); ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('public/user/test/plugins/back-to-top.js'); ?>"></script>
@@ -255,10 +269,18 @@
     <script type="text/javascript" src="<?php echo base_url('public/user/test/plugins/pretty-photo/js/jquery.prettyPhoto.js'); ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('public/user/test/plugins/flexslider/jquery.flexslider-min.js'); ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('public/user/test/plugins/jflickrfeed/jflickrfeed.min.js'); ?>"></script>
+    <!-- plugin has dependency of moment.js to show dates -->
+    <script src="<?=base_url()?>public/user/test/plugins/calendar-jquery/js/moment.js" type="text/javascript"></script>
+    <script src="<?=base_url()?>public/user/test/plugins/calendar-jquery/js/jquery.eventCalendar.min.js" type="text/javascript"></script>
+
+    <script src="<?php echo base_url('public/admin/bower_components/datatables/media/js/jquery.dataTables.min.js'); ?>"></script>
+    <script src="<?php echo base_url('public/admin/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js'); ?>"></script>
+    
     <script type="text/javascript" src="<?php echo base_url('public/user/test/js/main.js'); ?>"></script>
     <script type="text/javascript" src="<?php echo base_url('public/admin/modules/login.js'); ?>"></script>
     <!-- Page-Level Demo Scripts - Tables - Use for reference -->
     <script src="<?php echo base_url('public/user/modules/'.$modules.'.js'); ?>" type="text/javascript"></script>
+
 </body>
 
 <!-- Mirrored from themes.3rdwavemedia.com/college-green/1.6/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 29 Oct 2016 20:59:52 GMT -->
