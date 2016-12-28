@@ -30,6 +30,13 @@
                         </article><!--//course-item-->
                     </div><!--//course-wrapper-->
                     <aside class="page-sidebar  col-md-3 col-md-offset-1 col-sm-4 col-sm-offset-1">
+                        <section class="widget">
+                            <ul class="nav" style="margin-top: 20px;">
+                                <li class="active"><a href="<?=base_url();?>index/prestasi_sekolah">Prestasi Sekolah</a></li>
+                                <li><a href="<?=base_url();?>index/prestasi_guru">Prestasi Guru</a></li>
+                                <li><a href="<?=base_url();?>index/prestasi_siswa">Prestasi Siswa</a></li>
+                            </ul>
+                        </section>
                         <?php $this->load->view('user/menu/aside_content'); ?>
                     </aside>
                 </div><!--//page-row-->

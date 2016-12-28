@@ -281,7 +281,35 @@
     <!-- Page-Level Demo Scripts - Tables - Use for reference -->
     <script src="<?php echo base_url('public/user/modules/'.$modules.'.js'); ?>" type="text/javascript"></script>
 
-</body>
+    <script type="text/javascript">
+        $(document).ready(function(){
+    
+            $("#eventCalendarHumanDate").eventCalendar({
+                eventsjson: 'http://localhost/project_sekolah/index/event_data_user',
+                jsonDateFormat: 'human' // 'YYYY-MM-DD HH:MM:SS'
+            });
 
-<!-- Mirrored from themes.3rdwavemedia.com/college-green/1.6/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 29 Oct 2016 20:59:52 GMT -->
+            $.getJSON("http://localhost/project_sekolah/index/kontak_data", function(json) {
+                var content='';
+
+
+                //for (var a=0; a<json.data.length; a++) {
+                    
+                    //var id = json.data[a].id;
+                    var judul = json.data[0].judul;
+                    var isi = json.data[0].isi;
+                    var map = json.data[0].map;
+
+                    var maps = '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3953.0402176358093!2d110.37821475!3d-7.785560899999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a59d2a47d2609%3A0xd5a7d343fbdbcd63!2sJalan+Doktor+Wahidin+Sudirohusodo!5e0!3m2!1sid!2s!4v1395643159663" width="100%" height="70%" frameborder="0" style="border:0"></iframe>';
+                    
+                    $('#judul').html(judul);
+                    $('#isi').html(isi);
+                    $('#maps').html(maps);
+                //};
+            });
+
+        });
+    </script>
+
+</body>
 </html>

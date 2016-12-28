@@ -90,12 +90,12 @@
                     </section>
 
                     <!-- Artikel Terbaru -->
-                    <section class="news">
+                    <!-- <section class="news">
                         <h1 class="section-heading text-highlight"><span class="line">ARTIKEL TERBARU</span></h1>     
                         <div class="carousel-controls">
                             <a class="prev" href="#artikel-carousel" data-slide="prev"><i class="fa fa-caret-left"></i></a>
                             <a class="next" href="#artikel-carousel" data-slide="next"><i class="fa fa-caret-right"></i></a>
-                        </div><!--//carousel-controls--> 
+                        </div> 
                         <div class="section-content clearfix">
                             <div id="news-carousel" class="news-carousel carousel slide">
                                 <div class="carousel-inner" style="margin-top: 1%;">
@@ -117,9 +117,8 @@
                                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam bibendum mauris eget sapien consectetur pellentesque. Proin elementum tristique euismod. </p>
                                             <a class="read-more" href="news-single.html">Read more<i class="fa fa-chevron-right"></i></a>
                                             
-                                        </div><!--//news-item-->
-                                    </div><!--//item-->
-                                    <div class="item"> 
+                                        </div>
+                                    </div>
                                         <div class="col-md-6 news-item" style="padding-left: 0;">
                                             <center>
                                             <h2 class="title"><a href="news-single.html">Morbi at vestibulum turpis</a></h2>
@@ -137,8 +136,28 @@
                                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam bibendum mauris eget sapien consectetur pellentesque. Proin elementum tristique euismod. </p>
                                             <a class="read-more" href="news-single.html">Read more<i class="fa fa-chevron-right"></i></a>
                                             
-                                        </div><!--//news-item-->
-                                    </div><!--//item-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> 
+                        </div>   
+                    </section> -->
+
+                    <section class="news">
+                        <h1 class="section-heading text-highlight"><span class="line">Artikel TERBARU</span></h1>     
+                        <div class="carousel-controls">
+                            <a class="prev" href="#artikel-carousel" data-slide="prev"><i class="fa fa-caret-left"></i></a>
+                            <a class="next" href="#artikel-carousel" data-slide="next"><i class="fa fa-caret-right"></i></a>
+                        </div><!--//carousel-controls--> 
+                        <div class="section-content clearfix">
+                            <div id="artikel-carousel" class="artikel-carousel carousel slide">
+                                <div class="carousel-inner" style="margin-top: 1%;">
+                                    <div class="item active" id="dataArtikel">
+
+                                    </div>
+                                    <div class="item" id="dataArtikeli">
+
+                                    </div>
                                 </div><!--//carousel-inner-->
                             </div><!--//news-carousel-->  
                         </div><!--//section-content-->     
@@ -283,6 +302,26 @@
                             <p class="description">Aenean feugiat a diam tempus sodales. Quisque lorem nulla, ultrices imperdiet malesuada at, suscipit vel lorem. Nulla dignissim nisi ac aliquet semper.</p>
                         </div><!--//section-content-->
                     </section><!--//video-->
+
+                    <section class="news">
+                        <h1 class="section-heading text-highlight"><span class="line">Artikel TERBARU</span></h1>     
+                        <div class="carousel-controls">
+                            <a class="prev" href="#artikel-carousel" data-slide="prev"><i class="fa fa-caret-left"></i></a>
+                            <a class="next" href="#artikel-carousel" data-slide="next"><i class="fa fa-caret-right"></i></a>
+                        </div><!--//carousel-controls--> 
+                        <div class="section-content clearfix">
+                            <div id="artikel-carousel" class="artikel-carousel carousel slide">
+                                <div class="carousel-inner" style="margin-top: 1%;">
+                                    <div class="item active" id="dataArtikel">
+
+                                    </div>
+                                    <div class="item" id="dataArtikeli">
+
+                                    </div>
+                                </div>
+                            </div>  
+                        </div>     
+                    </section>
                 </div>
             </div>
 
@@ -290,7 +329,7 @@
                 <div id="awards-carousel" class="awards-carousel carousel slide">
                     <div class="carousel-inner">
                         <div class="item active">
-                            <ul class="logos">
+                            <ul class="logos" id="isi_galeri">
                                 <li class="col-md-2 col-sm-2 col-xs-4">
                                     <a href="#"><img class="img-responsive" src="<?php echo base_url('public/user/test/images/awards/award1.jpg'); ?>"  alt="" /></a>
                                 </li>

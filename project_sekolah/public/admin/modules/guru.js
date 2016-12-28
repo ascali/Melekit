@@ -4,7 +4,7 @@ var base_url = 'http://localhost/project_sekolah/';
 
 $(document).ready(function(){
 
-	 table = $('#guru').DataTable( {
+	table = $('#guru').DataTable( {
 		"processing": true,
 		"order": [],
 			"ajax": {

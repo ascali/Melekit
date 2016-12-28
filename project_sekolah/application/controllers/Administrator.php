@@ -222,7 +222,6 @@ class Administrator extends CI_Controller {
 			echo json_encode($data);
 			exit();
 		}
-
 	}
 
 /*============================================================================================================================*/
@@ -341,7 +340,6 @@ class Administrator extends CI_Controller {
 			echo json_encode($data);
 			exit();
 		}
-
 	}
 
 //====================================================================================//
@@ -463,6 +461,46 @@ class Administrator extends CI_Controller {
 //====================================================================================//
 // Akhir Bagian Visi Misi
 //====================================================================================//
+
+//====================================================================================//
+// Mulai Bagian Kontak
+/* Work by Ibnu */
+//====================================================================================//
+
+	public function kontak()
+	{
+		$take_akun = $this->Global_models->take_user($this->session->userdata('username'));
+		$data = array('username' => $take_akun);
+		$stat = $this->session->userdata('isLogin');
+
+		if (isset($stat)) {
+			$data['modules'] = 'kontak';
+			$data['modals']	 = 'admin/modules/kontak/kontak_modal';
+			$data['content'] = 'admin/modules/kontak/kontak';
+			$this->load->view('admin/index', $data);
+		}else {
+			echo "<script> alert('Check your username and password!'); </script>";
+			$this->session->sess_destroy();
+			redirect(base_url(),'refresh');	
+		}		
+	}
+
+	public function kontak_data()
+	{
+    	$this->db->order_by('id', 'desc');
+    	$query = $this->db->get('kontak');
+    	// $query = $this->db->query('SELECT * FROM users ORDER BY id DESC');
+    	$query = $query->result();
+    	if (isset($query)) {
+    		$status = 'success';
+    		$query = $query;
+    	}else {
+    		$status = 'error';
+    		$query = 'error';
+    	}
+    	header('Content-Type: application/json');
+    	echo json_encode(array('status' => $status, 'data' => $query));
+	}
 
 //====================================================================================//
 // Mulai Bagian Kelas
@@ -931,8 +969,6 @@ class Administrator extends CI_Controller {
 
 	public function siswa_data()
 	{
-    	// $this->db->order_by('id', 'desc');
-    	// $query = $this->db->get('siswa');
     	$query = $this->db->query('SELECT a.*, b.nama as nama_jurusan FROM siswa a
     								JOIN jurusan b ON (a.id_jurusan=b.id) ORDER BY a.id DESC');
     	$query = $query->result();
@@ -1992,6 +2028,149 @@ class Administrator extends CI_Controller {
 //====================================================================================//
 /* End of file Administrator.php */
 /* Location: ./application/controllers/Administrator.php */
+
+//====================================================================================//
+// Mulai Bagian Event
+/* Work by Ascal */
+//====================================================================================//
+
+	public function event()
+	{
+		$take_akun = $this->Global_models->take_user($this->session->userdata('username'));
+		$data = array('username' => $take_akun);
+		$stat = $this->session->userdata('isLogin');
+
+		if (isset($stat)) {
+			$data['modules'] = 'event';
+			$data['modals']	 = 'admin/modules/event/event_modal';
+			$data['content'] = 'admin/modules/event/event';
+			$this->load->view('admin/index', $data);
+		}else {
+			echo "<script> alert('Check your username and password!'); </script>";
+			$this->session->sess_destroy();
+			redirect(base_url(),'refresh');	
+		}
+	}
+
+	public function event_data()
+	{
+    	$this->db->order_by('id', 'desc');
+    	$query = $this->db->get('event');
+    	// $query = $this->db->query('SELECT * FROM users ORDER BY id DESC');
+    	$query = $query->result();
+    	if (isset($query)) {
+    		$status = 'success';
+    		$query = $query;
+    	}else {
+    		$status = 'error';
+    		$query = 'error';
+    	}
+    	header('Content-Type: application/json');
+    	echo json_encode(array('status' => $status, 'data' => $query));
+	}
+
+    public function event_edit_data($id)
+    {
+    	$this->db->from('event');
+		$this->db->where('id',$id);
+		$query = $this->db->get();
+		if (isset($query)) {
+    		$status = 'success';
+    		$query = $query;
+    	}else {
+    		$status = 'error';
+    		$query = 'error';
+    	}
+    	$query = $query->row();
+    	header('Content-Type: application/json');
+    	echo json_encode(array('status' => $status, 'data' => $query));
+    }
+
+    //Aksi Insert
+    public function event_insert_data()
+    {
+    	$this->_validate_event();
+    	$data = array(
+				'date' => $this->input->post('date'),
+				'type' => $this->input->post('type'),
+				'title' => $this->input->post('title'),
+				'description' => $this->input->post('description'),
+				'url'	=> $this->input->post('url'),
+				'created' => date('Y-m-d H:i:s'),
+				'updated' => date('Y-m-d H:i:s')
+			);
+
+		$dbInsert = $this->db->insert('event', $data);
+		echo json_encode(array('status' => TRUE));
+    }
+    // Aksi update
+    public function event_update_data()
+    {
+		$this->_validate_event();
+		$data = array(
+				'date' => $this->input->post('date'),
+				'type' => $this->input->post('type'),
+				'title' => $this->input->post('title'),
+				'description' => $this->input->post('description'),
+				'url'	=> $this->input->post('url'),
+				'updated' => date('Y-m-d H:i:s')
+			);
+
+		$this->db->where('id', $this->input->post('id'));
+		$this->db->update('event', $data);
+		echo json_encode(array('status' => TRUE));
+    }
+
+    public function event_delete_data($id)
+    {
+    	$this->db->where('id', $id);
+    	$this->db->delete('event');
+    	echo json_encode(array("status" => TRUE));
+    }
+
+    // Untuk Validasi
+    private function _validate_event()
+	{
+		$data = array();
+		$data['error_string'] = array();
+		$data['inputerror'] = array();
+		$data['status'] = TRUE;
+
+		if($this->input->post('date') == '')
+		{
+			$data['inputerror'][] = 'date';
+			$data['error_string'][] = 'Date is required';
+			$data['status'] = FALSE;
+		}
+		if($this->input->post('type') == '')
+		{
+			$data['inputerror'][] = 'type';
+			$data['error_string'][] = 'Type is required';
+			$data['status'] = FALSE;
+		}
+		if($this->input->post('title') == '')
+		{
+			$data['inputerror'][] = 'title';
+			$data['error_string'][] = 'Title is required';
+			$data['status'] = FALSE;
+		}
+		if($this->input->post('description') == '')
+		{
+			$data['inputerror'][] = 'description';
+			$data['error_string'][] = 'Description is required';
+			$data['status'] = FALSE;
+		}
+		if($data['status'] === FALSE)
+		{
+			echo json_encode($data);
+			exit();
+		}
+
+	}
+//====================================================================================//
+// Akhir Bagian Event
+//====================================================================================//
+
 
 //====================================================================================//
 // Mulai Bagian Agenda

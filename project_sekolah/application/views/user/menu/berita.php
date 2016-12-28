@@ -36,49 +36,7 @@
                                 <h3 class="title">Arcu Aliquet Quam Vel</h3>
                                 <p>Maecenas nisl urna, condimentum ac justo a, adipiscing hendrerit magna. Fusce pharetra laoreet accumsan. Phasellus elit sapien, consequat vel sapien sit amet, condimentum vulputate odio. Aliquam fringilla justo quis est placerat, eu imperdiet lorem cursus. Curabitur pretium nulla lorem, sed egestas ante vestibulum dignissim.</p>
                             </section><!--//widget-->
-                            <section class="widget has-divider">
-                                <h3 class="title">Upcoming Events</h3>
-                                <article class="events-item row page-row">                                    
-                                        <div class="date-label-wrapper col-md-3 col-sm-4 col-xs-4">
-                                            <p class="date-label">
-                                                <span class="month">FEB</span>
-                                                <span class="date-number">18</span>
-                                            </p>
-                                        </div><!--//date-label-wrapper-->
-                                        <div class="details col-md-9 col-sm-8 col-xs-8">
-                                            <h5 class="title">Open Day</h5>  
-                                            <p class="time text-muted">10:00am - 18:00pm<br />East Campus</p>                  
-                                        </div><!--//details-->                                    
-                                </article>
-                                <article class="events-item row page-row">
-                                    <div class="date-label-wrapper col-md-3 col-sm-4 col-xs-4">
-                                        <p class="date-label">
-                                            <span class="month">SEP</span>
-                                            <span class="date-number">06</span>
-                                        </p>
-                                    </div><!--//date-label-wrapper-->
-                                    <div class="details col-md-9 col-sm-8 col-xs-8">
-                                        <h5 class="title">E-learning at College Green</h5>   
-                                        <p class="time text-muted">10:00am - 16:00pm<br />Learning Center</p>                
-                                    </div><!--//details-->
-                                </article>
-                                <article class="events-item row page-row">
-                                    <div class="date-label-wrapper col-md-3 col-sm-4 col-xs-4">
-                                        <p class="date-label">
-                                            <span class="month">JUN</span>
-                                            <span class="date-number">23</span>
-                                        </p>
-                                    </div><!--//date-label-wrapper-->
-                                    <div class="details col-md-9 col-sm-8 col-xs-8">
-                                        <h5 class="title">Career Fair</h5>   
-                                        <p class="time text-muted">09:45am - 16:00pm<br />Library</p>                
-                                    </div><!--//details-->
-                                </article>
-                            </section><!--//widget-->
-                            <section class="widget">
-                                <h3 class="title">Flickr Photo Stream</h3>
-                                <ul id="flickr-photos"></ul><!--//flickr-photos-->
-                            </section><!--//widget--> 
+                            <?php $this->load->view('user/menu/aside_content'); ?> 
                         </aside>
                     </div>
                 </div>

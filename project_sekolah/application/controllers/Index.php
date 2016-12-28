@@ -302,22 +302,94 @@ class Index extends CI_Controller {
     	echo json_encode(array('status' => $status, 'data' => $query));
 	}
 
-
 	public function osis()
 	{
-		$data['datas']   = $this->db->query('SELECT * FROM profil WHERE id=1')->result_object();
-		$data['data']    = $this->db->query('SELECT * FROM gambar WHERE status_slide=1')->result_object();
-		$data['content'] = 'user/menu/konten_umum';
+		$data['modules'] = 'osis';
+		$data['content'] = 'user/menu/osis';
 		$this->load->view('user/index',$data);
 	}
 
+	public function osis_data()
+	{
+		$query = $this->db->query('SELECT * FROM konten WHERE id_kategori_konten = "5" ORDER BY created DESC');
+		$query = $query->result();
+		if (isset($query)) {
+			$status = 'success';
+			$query = $query;
+		}else {
+			$status = 'error';
+			$query = 'error';
+		}
+		header('Content-Type: application/json');
+		echo json_encode(array('status' => $status, 'data' => $query));
+	}
 
 	public function ekstra_kurikuler()
 	{
-		$data['datas']   = $this->db->query('SELECT * FROM profil WHERE id=1')->result_object();
-		$data['data']    = $this->db->query('SELECT * FROM gambar WHERE status_slide=1')->result_object();
-		$data['content'] = 'user/menu/konten_umum';
+		$data['modules'] = 'eskul';
+		$data['content'] = 'user/menu/eskul';
 		$this->load->view('user/index',$data);
+	}
+
+	public function eskull_data()
+	{
+		$query = $this->db->query('SELECT * FROM eskull ORDER BY created DESC');
+		$query = $query->result();
+		if (isset($query)) {
+			$status = 'success';
+			$query = $query;
+		}else {
+			$status = 'error';
+			$query = 'error';
+		}
+		header('Content-Type: application/json');
+		echo json_encode(array('status' => $status, 'data' => $query));
+	}
+
+	public function detail_eskull_data($id)
+	{
+		$this->db->from('eskull');
+		$this->db->where('id',$id);
+		$query = $this->db->get();
+		if (isset($query)) {
+    		$status = 'success';
+    		$query = $query;
+    	}else {
+    		$status = 'error';
+    		$query = 'error';
+    	}
+    	$query = $query->row();
+    	header('Content-Type: application/json');
+    	echo json_encode(array('status' => $status, 'data' => $query));	
+	}
+
+	public function detail_eskull($detail_eskull)
+	{
+		$data['modules'] = 'mod_detail_eskull';
+		$data['content'] = 'user/menu/detail_eskull';
+		$this->load->view('user/index', $data);
+	}
+
+	public function prakerin()
+	{
+		$data['modules'] = 'prakerin';
+		$data['content'] = 'user/menu/prakerin';
+		$this->load->view('user/index',$data);
+	}
+
+	public function prakerin_data()
+	{
+		$query = $this->db->query('SELECT * FROM konten WHERE id_kategori_konten = "6" ORDER BY created DESC');
+		$query = $query->result();
+		if (isset($query)) {
+			$status = 'success';
+			$query = $query;
+		}else {
+			$status = 'error';
+			$query = 'error';
+		}
+		header('Content-Type: application/json');
+		echo json_encode(array('status' => $status, 'data' => $query));
 	}
 
 	public function berita()
@@ -565,6 +637,23 @@ class Index extends CI_Controller {
 		}
 		header('Content-Type: application/json');
 		echo json_encode(array('status' => $status, 'data' => $query));
+	}
+
+	public function jurusan_data()
+	{
+    	$this->db->order_by('id', 'desc');
+    	$query = $this->db->get('jurusan');
+    	// $query = $this->db->query('SELECT * FROM jurusans ORDER BY id DESC');
+    	$query = $query->result();
+    	if (isset($query)) {
+    		$status = 'success';
+    		$query = $query;
+    	}else {
+    		$status = 'error';
+    		$query = 'error';
+    	}
+    	header('Content-Type: application/json');
+    	echo json_encode(array('status' => $status, 'data' => $query));
 	}
 
 

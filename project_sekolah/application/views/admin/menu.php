@@ -45,6 +45,9 @@
                                 <li>
                                     <a href="<?=base_url('administrator/jurusan')?>"><i class="fa fa-book fa-fw"></i> Jurusan</a>
                                 </li>
+                                <li>
+                                    <a href="<?php echo base_url('administrator/kontak'); ?>"><i class="fa fa-book fa-fw"></i>Kontak</a>
+                                </li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
@@ -70,7 +73,7 @@
                             <a href="<?=base_url('administrator/registrasi')?>"><i class="fa fa-book fa-fw"></i> Registrasi</a>
                         </li>
                         <li>
-                            <a href="<?=base_url('administrator/agenda')?>"><i class="fa fa-book fa-fw"></i> Agenda</a>
+                            <a href="<?=base_url('administrator/event')?>"><i class="fa fa-book fa-fw"></i> Agenda</a>
                         </li>
                         <li>
                             <a href="<?=base_url('administrator/kemitraan')?>"><i class="fa fa-book fa-fw"></i> Kemitraan</a>

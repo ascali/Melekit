@@ -23,7 +23,16 @@
                             </article><!--//course-item-->                                              
                         </div><!--//course-wrapper-->
                         <aside class="page-sidebar  col-md-3 col-md-offset-1 col-sm-4 col-sm-offset-1">
-                        <?php $this->load->view('user/menu/aside_content'); ?>
+                            <section class="widget">
+                                <ul class="nav" style="margin-top: 20px;">
+                                    <li><a href="<?=base_url();?>index/profil_sekolah">Profil Sekolah</a></li>
+                                    <li class="active"><a href="<?=base_url();?>index/struktur_organisasi">Struktur Organisasi</a></li>
+                                    <li><a href="<?=base_url();?>index/sejarah">Sejarah</a></li>
+                                    <li><a href="<?=base_url();?>index/visi_misi">Visi Misi</a></li>
+                                    <li><a href="<?=base_url();?>index/fasilitas">Fasilitas</a></li>
+                                </ul>                    
+                            </section>
+                            <?php $this->load->view('user/menu/aside_content'); ?>
                     </aside>
                     </div><!--//page-row-->
                 </div><!--//page-content-->

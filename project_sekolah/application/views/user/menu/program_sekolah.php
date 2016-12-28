@@ -32,6 +32,7 @@
                     <aside class="page-sidebar  col-md-3 col-md-offset-1 col-sm-4 col-sm-offset-1">
                         <?php $this->load->view('user/menu/aside_content'); ?>
                     </aside>
+                    
                 </div><!--//page-row-->
             </div><!--//page-content-->
         </div><!--//page-->

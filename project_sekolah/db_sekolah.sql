@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Inang: 127.0.0.1
--- Waktu pembuatan: 21 Des 2016 pada 05.38
+-- Waktu pembuatan: 25 Des 2016 pada 04.08
 -- Versi Server: 5.6.14
 -- Versi PHP: 5.5.6
 
@@ -352,7 +352,7 @@ CREATE TABLE IF NOT EXISTS `konten` (
   `updated` timestamp NULL DEFAULT NULL,
   `create_by` varchar(254) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
 
 --
 -- Dumping data untuk tabel `konten`
@@ -367,7 +367,9 @@ INSERT INTO `konten` (`id`, `judul`, `isi`, `id_kategori_konten`, `gambar`, `cre
 (6, 'Artikel 1', 'Artikel 1', 2, '1481036637241.jpg', '2016-12-05 17:00:00', '2016-12-05 17:00:00', 'Admin'),
 (7, 'Artikel 2', 'Artikel 2', 2, '1481037881692.jpg', '2016-12-05 17:00:00', '2016-12-05 17:00:00', 'Admin'),
 (8, 'Web Developer', 'Web Developer', 4, '1481038696245.jpg', NULL, NULL, ''),
-(9, 'Administrator', 'Administrator', 4, '1481038729987.jpg', NULL, NULL, '');
+(9, 'Administrator', 'Administrator', 4, '1481038729987.jpg', NULL, NULL, ''),
+(10, 'Artikel 3', 'Artikel 3', 2, '1482303952377.jpg', NULL, NULL, ''),
+(11, 'Artikel 4', 'Artikel 4', 2, '1482306168622.jpg', NULL, NULL, '');
 
 -- --------------------------------------------------------
 

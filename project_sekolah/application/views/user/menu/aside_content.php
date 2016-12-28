@@ -1,34 +1,35 @@
-                        <section class="widget has-divider">
-                            <h3 class="title">Why College Green Online</h3>
-                            <p>Donec pulvinar arcu lacus, vel aliquam libero scelerisque a. Cras mi tellus, vulputate eu eleifend at, consectetur fringilla lacus. Nulla ut purus.</p>
-                            <a class="btn btn-theme" href="#"><i class="fa fa-download"></i>Download prospectus</a>
-                        </section><!--//widget-->
-                        <section class="widget has-divider">
-                            <h3 class="title">Enquire about this course</h3>
-                            <p>Donec pulvinar arcu lacus, vel aliquam libero scelerisque a. Cras mi tellus, vulputate eu eleifend at, consectetur fringilla lacus. Nulla ut purus.</p>
-                            <p class="tel"><i class="fa fa-phone"></i>Tel: 0800 123 4567</p>
-                            <p class="email"><i class="fa fa-envelope"></i>Email: <a href="#">enquires@website.com</a></p>
-                        </section><!--//widget-->
-                        <section class="widget has-divider">
-                            <h3 class="title">Related courses</h3>
-                            <ul class="list-unstyled">
-                                <li><a href="#"><i class="fa fa-book"></i> Ut enim ad minim veniam</a></li>
-                                <li><a href="#"><i class="fa fa-book"></i> Lorem ipsum dolor sit amet</a></li>
-                                <li><a href="#"><i class="fa fa-book"></i> Cras et sapien rhoncus</a></li>
-                                <li><a href="#"><i class="fa fa-book"></i> Praesent ut turpis feugiat</a></li>
-                                <li><a href="#"><i class="fa fa-book"></i> Aenean interdum iaculis odio</a></li>
-                                <li><a href="#"><i class="fa fa-book"></i> Morbi in malesuada nibh</a></li>
-                                <li><a href="#"><i class="fa fa-book"></i> Fusce a ligula in velit</a></li>
-                            </ul>
-                        </section><!--//widget-->
-                        <section class="widget has-divider">
-                            <h3 class="title">Apply Online</h3>
-                            <p>Donec pulvinar arcu lacus, vel aliquam libero scelerisque a. Cras mi tellus, vulputate eu eleifend at, consectetur fringilla lacus. Nulla ut purus.</p>
-                            <p class="promo-badge">
-                                <a class="OliveDrab" href="#">
-                                    <span class="percentage">20% <span class="off">OFF</span></span>
-                                    <br>
-                                    <span class="desc">Online application</span>
-                                </a>
-                            </p>
-                        </section><!--//widget-->
+                   
+                            <section class="links">
+                                <!-- <h1 class="section-heading text-highlight"><span class="line">Calendar</span></h1> -->
+                                <div style="padding-bottom: 1px; background-color: #6091ba; margin-top: -21px; margin-bottom: 20px;padding-top: 7px; ">
+                                    <center>
+                                            <!-- <h3 style="margin-top: 15px;">Agenda</h3> -->
+                                        <h3 class="section-heading text-highlight">
+                                            <span class="line" style="color: white;">Agenda</span>
+                                        </h3>        
+                                    </center>
+                                </div>
+                                <div class="section-content">
+                                    
+                                    <div id="eventCalendarHumanDate"></div>
+                                </div>
+                            </section>
+                            
+                            
+                            
+                            <section class="widget">
+                                <div style="padding-bottom: 1px; background-color: #6091ba; margin-top: -21px; margin-bottom: 20px;padding-top: 7px; ">
+                                    <center>
+                                            <!-- <h3 style="margin-top: 15px;">Agenda</h3> -->
+                                        <h3 class="section-heading text-highlight">
+                                            <span class="line" style="color: white;">Maps</span>
+                                        </h3>        
+                                    </center>
+                                </div>
+
+                                <div class="section-content">
+                                    <div id="maps"></div>
+                                </div>
+                                <!-- <ul id="flickr-photos"></ul> --><!--//flickr-photos-->
+                            </section><!--//widget--> 
+                        

@@ -65,6 +65,12 @@
                         <li class="nav-item dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false" href="#">Jurusan <i class="fa fa-angle-down"></i></a>
                             <ul class="dropdown-menu">
+                                <?php
+                                  /*$mdasi=mysql_query("SELECT id,judul FROM daftarsiswa ORDER BY tampil ASC");
+                                  while ($tmdasi=mysql_fetch_array($mdasi)){
+                                    echo"<li><a href='daftarsiswa-$tmdasi[id]'>$tmdasi[judul]</a></li>";
+                                  }*/
+                                ?>
                                 <li><a href="<?=base_url();?>index/tkr">Teknik Kendaraan Ringan</a></li>
                                 <li><a href="<?=base_url();?>index/tkj">Teknik Komputer & Jaringan</a></li>
                                 <li><a href="<?=base_url();?>index/mm">Multimedia</a></li>
@@ -76,7 +82,7 @@
                             <ul class="dropdown-menu">
                               <li><a href="<?=base_url();?>index/osis">Osis</a></li>
                               <li><a href="<?=base_url();?>index/ekstra_kurikuler">Ekstra Kurikuler</a></li>
-                              <li><a href="<?=base_url();?>index/opini_siswa">Opini Siswa</a></li>
+                              <!-- <li><a href="<?=base_url();?>index/opini_siswa">Opini Siswa</a></li> -->
                               <li><a href="<?=base_url();?>index/prakerin">Prakerin</a></li>
                             </ul>
                         </li>

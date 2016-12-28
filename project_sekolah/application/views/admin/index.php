@@ -138,11 +138,13 @@
 
     <!-- Page-Level Demo Scripts - Tables - Use for reference -->
     <script src="<?php echo base_url('public/admin/modules/'.$modules.'.js'); ?>" type="text/javascript"></script>
-
+    <script type="text/javascript" src="https://cdn.datatables.net/fixedheader/3.1.2/js/dataTables.fixedHeader.min.js"></script>
+    
     <script>
     $(document).ready(function() {
         $('#dataTables-example').DataTable({
-                responsive: true
+                responsive: true,
+                fixedHeader: true
         });
     });
     </script>
