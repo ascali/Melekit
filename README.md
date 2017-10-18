@@ -1,3 +1,3 @@
 # Melekit
 project_sekolah
-SEMANGAT JERET TERUS !!!!!!!!
+SEMANGAT TERUS !!!!!!!!
